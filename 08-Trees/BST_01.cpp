@@ -2,6 +2,7 @@
 #include <vector>
 #include <algorithm>
 #include <string>
+#include<climits>
 using namespace std;
 
 class Node{
@@ -208,6 +209,46 @@ int count_internal_Nodes_02(Node* root) {
     return count + left_subtree + right_subtree;
 }
 
+int Height_BST(Node* root){
+    if(root == NULL){
+        return 0;
+    }
+
+    int left_subtree = Height_BST(root->left);
+    int right_subtree = Height_BST(root->right);
+
+    return 1 + max(left_subtree,right_subtree);
+}
+// Strict Binary Tree Not BST
+bool is_Strict_BT(Node* root){
+    // zero Nodes
+    if(root == NULL){
+        cout << "No TREE" << endl;
+        return false;
+    }
+
+    // No leaf Nodes
+    if(root->left == NULL && root->right == NULL){
+        return true;
+    }
+
+    // having 2 childs
+    else if(root->left != NULL && root->right != NULL){
+        return is_Strict_BT(root->left) && is_Strict_BT(root->right);
+    }
+
+    return false;
+}
+
+// STRICT BST
+bool IS_STRICT_BST(Node* root){
+    if(root == NULL){
+        return false;
+    }
+
+
+}
+
 int main() {
 
     Node *root = NULL;
@@ -250,8 +291,11 @@ int main() {
    root =  Delete_Node(root, 50);
     Print_Binaray_Tree(root);
 
-   
+    // Height of BST
+    cout << "Height of BST: " << Height_BST(root) << endl;
 
+    // Strict BT
+    cout << is_Strict_BT(root) << endl;
 
     return 0;
 }
