@@ -47,11 +47,11 @@ Where:
 Example:
 
 $$
-V = {0,1,2,3,4}
+V = \{0,1,2,3,4\}
 $$
 
 $$
-E = {{0,1},{1,2},{1,3},{2,3},{2,4}}
+E = \{\{0,1\},\{1,2\},\{1,3\},\{2,3\},\{2,4\}\}
 $$
 
 Here:
@@ -71,6 +71,8 @@ graph LR
 ```
 
 A graph is useful for representing relationships:
+
+![Graph fundamentals: vertices, edges, and graph types](../../assets/graphs/graph-fundamentals.svg)
 
 | Application | Vertices | Edges |
 |---|---|---|
@@ -94,7 +96,7 @@ A graph is useful for representing relationships:
 | $|E|$ | Number of edges |
 | $u,v$ | Common names for vertices |
 | $(u,v)$ | Directed edge from $u$ to $v$ |
-| ${u,v}$ | Undirected edge between $u$ and $v$ |
+| $\{u,v\}$ | Undirected edge between $u$ and $v$ |
 | $\deg(v)$ | Degree of vertex $v$ |
 | $N(v)$ | Neighbour set of vertex $v$ |
 | $w(u,v)$ | Weight of edge between $u$ and $v$ |
@@ -163,7 +165,7 @@ For a directed graph, terminology is directional:
 
 An edge is **incident** on a vertex if the vertex is one of its endpoints.
 
-For edge ${A,B}$:
+For edge $\{A,B\}$:
 
 - The edge is incident on A.
 - The edge is incident on B.
@@ -358,7 +360,7 @@ graph LR
 
 If A is connected to B, B is also connected to A.
 
-In an adjacency list, an ordinary undirected edge ${u,v}$ is normally stored twice:
+In an adjacency list, an ordinary undirected edge $\{u,v\}$ is normally stored twice:
 
 ```cpp
 adj[u].push_back(v);
@@ -823,6 +825,8 @@ There are several common ways to represent a graph.
 
 An adjacency matrix is a $(V \times V)$ matrix.
 
+![Adjacency matrix representation of a graph](../../assets/graphs/adjacency-matrix.svg)
+
 For an unweighted graph:
 
 $$
@@ -965,6 +969,8 @@ A `visited` array is commonly used to avoid visiting a vertex repeatedly.
 
 ## 12.1 Breadth‑First Search (BFS)
 
+![Breadth-first search traversal from a starting vertex](../../assets/graphs/bfs-traversal.svg)
+
 BFS explores a graph level by level.
 
 It uses a **queue** (FIFO: First In, First Out).
@@ -981,6 +987,8 @@ Basic process:
 BFS is useful for finding shortest paths in an unweighted graph (in terms of number of edges).
 
 ## 12.2 Depth‑First Search (DFS)
+
+![Depth-first search traversal with backtracking](../../assets/graphs/dfs-traversal.svg)
 
 DFS explores as far as possible along one branch before backtracking.
 

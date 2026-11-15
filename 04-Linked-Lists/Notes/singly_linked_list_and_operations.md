@@ -79,6 +79,8 @@ Uses the classic **Three-Pointer Technique** (`prev`, `curr`, `next`):
 
 ## 5. Visual Representation
 
+![Singly linked list nodes connected through next pointers](../../assets/linked-lists/singly-linked-list.svg)
+
 ### 1. Inserting Node `25` at `pos = 2` (`insert(25, 2)`)
 ```
 Before:
@@ -97,6 +99,9 @@ After:
 ```
 
 ### 2. Three-Pointer Reversal (`reverse()` in `linked_list-01.cpp`)
+
+![Reversing a singly linked list by changing its links](../../assets/linked-lists/reverse-linked-list.svg)
+
 ```
 Initial:
 prev = NULL     curr = [10] ---> [20] ---> [30] ---> NULL

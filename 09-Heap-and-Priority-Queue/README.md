@@ -47,5 +47,5 @@ minHeap.pop(); // Removes 10 in O(log n)
 ```
 
 ### 3. Top-K Pattern
-- To find **K Largest Elements**: Maintain a Min-Heap of size \( K \). For each element, if greater than `minHeap.top()`, pop and push. Remaining heap contains the K largest elements in \( O(n \log K) \) time!
-- To find **K Smallest Elements**: Maintain a Max-Heap of size \( K \).
+- To find **K Largest Elements**: Maintain a Min-Heap of size $ K $. For each element, if greater than `minHeap.top()`, pop and push. Remaining heap contains the K largest elements in $ O(n \log K) $ time!
+- To find **K Smallest Elements**: Maintain a Max-Heap of size $ K $.

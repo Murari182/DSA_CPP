@@ -18,9 +18,9 @@ A comprehensive module covering STL containers, iterators, function objects, and
 
 | Container | Underlying Structure | Access | Insert/Delete (Front) | Insert/Delete (Back) | Search |
 |---|---|---|---|---|---|
-| `std::vector` | Dynamic contiguous array | \( O(1) \) | \( O(n) \) | \( O(1) \) amortized | \( O(n) \) / \( O(\log n) \) (sorted) |
-| `std::deque` | Array of fixed-size chunks | \( O(1) \) | \( O(1) \) | \( O(1) \) | \( O(n) \) |
-| `std::list` | Doubly linked list | \( O(n) \) | \( O(1) \) | \( O(1) \) | \( O(n) \) |
-| `std::set` / `std::map` | Red-Black Tree (Self-balancing BST) | — | \( O(\log n) \) | \( O(\log n) \) | \( O(\log n) \) |
-| `std::unordered_set` / `std::unordered_map` | Hash Table with Separate Chaining | — | Avg: \( O(1) \), Worst: \( O(n) \) | Avg: \( O(1) \), Worst: \( O(n) \) | Avg: \( O(1) \), Worst: \( O(n) \) |
-| `std::priority_queue` | Binary Heap | Top: \( O(1) \) | — | Push/Pop: \( O(\log n) \) | — |
+| `std::vector` | Dynamic contiguous array | $ O(1) $ | $ O(n) $ | $ O(1) $ amortized | $ O(n) $ / $ O(\log n) $ (sorted) |
+| `std::deque` | Array of fixed-size chunks | $ O(1) $ | $ O(1) $ | $ O(1) $ | $ O(n) $ |
+| `std::list` | Doubly linked list | $ O(n) $ | $ O(1) $ | $ O(1) $ | $ O(n) $ |
+| `std::set` / `std::map` | Red-Black Tree (Self-balancing BST) | — | $ O(\log n) $ | $ O(\log n) $ | $ O(\log n) $ |
+| `std::unordered_set` / `std::unordered_map` | Hash Table with Separate Chaining | — | Avg: $ O(1) $, Worst: $ O(n) $ | Avg: $ O(1) $, Worst: $ O(n) $ | Avg: $ O(1) $, Worst: $ O(n) $ |
+| `std::priority_queue` | Binary Heap | Top: $ O(1) $ | — | Push/Pop: $ O(\log n) $ | — |

@@ -89,6 +89,9 @@ When `slow` and `fast` first meet:
 ## 5. Visual Representation
 
 ### Diagram of Cycle Parameters ($L = 3, C = 5, x = 2$)
+
+![Floyd's cycle detection with slow and fast pointers](../../assets/linked-lists/floyd-cycle-detection.svg)
+
 ```
                        L = 3 steps                   CycleStart (val = 40)
 head                                                       |

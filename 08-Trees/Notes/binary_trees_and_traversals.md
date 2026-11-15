@@ -84,6 +84,8 @@ Given `arr = {50, 30, -1, -1, 70, 60, -1, -1, 80, -1, -1}` and `static int idx =
 
 ## 5. Visual Representation
 
+![Binary tree fundamentals: parent, child, and leaf relationships](../../assets/trees/binary-tree-fundamentals.svg)
+
 ### 1. Tree Constructed in `Binary_Tree_01.cpp` (`{50, 30, -1, -1, 70, 60, -1, -1, 80, -1, -1}`)
 ```
                  50              <-- Level 0 (Root)
@@ -104,6 +106,8 @@ Traversals of this Tree:
   30 70
   60 80
 ```
+
+![Binary tree traversal orders](../../assets/trees/tree-traversals.svg)
 
 ### 2. Array-Based Tree in `Binary_Tree_Array.cpp` (`{10, 20, 30, 40, 50, 60, 70}`)
 ```

@@ -39,5 +39,5 @@ int binarySearch(const std::vector<int>& arr, int target) {
     return -1; // Target not found
 }
 ```
-- **Time Complexity:** Best: \( O(1) \), Worst/Average: \( O(\log n) \).
-- **Space Complexity:** Iterative: \( O(1) \), Recursive: \( O(\log n) \) call stack.
+- **Time Complexity:** Best: $ O(1) $, Worst/Average: $ O(\log n) $.
+- **Space Complexity:** Iterative: $ O(1) $, Recursive: $ O(\log n) $ call stack.

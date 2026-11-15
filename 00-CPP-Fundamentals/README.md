@@ -38,7 +38,7 @@ A comprehensive module covering essential C++ concepts, memory management, point
 ### Pointers vs References
 - **Pointer (`T*`):** A variable holding the memory address of another variable. Can be re-assigned, can be `nullptr`, supports pointer arithmetic.
 - **Reference (`T&`):** An immutable alias for an existing variable. Cannot be null, cannot be re-seated to another object after initialization, behaves syntactically like a direct variable.
-- **Rule of Thumb for DSA:** Pass read-only large containers by constant reference (`const std::vector<int>& arr`) to eliminate \( O(n) \) copying overhead!
+- **Rule of Thumb for DSA:** Pass read-only large containers by constant reference (`const std::vector<int>& arr`) to eliminate $ O(n) $ copying overhead!
 
 ---
 
@@ -49,6 +49,6 @@ O(1) < O(\log n) < O(\sqrt{n}) < O(n) < O(n \log n) < O(n^2) < O(2^n) < O(n!)
 ```
 
 ### Distinguishing Asymptotic Notations
-- **Big-O (\( O \)):** Upper Bound. \( f(n) \le c \cdot g(n) \) for all \( n \ge n_0 \). Guarantees the algorithm will run no slower than this bound.
-- **Big-Omega (\( \Omega \)):** Lower Bound. \( f(n) \ge c \cdot g(n) \). Guarantees the algorithm will take at least this much time in the specified scenario.
-- **Big-Theta (\( \Theta \)):** Tight Bound. \( c_1 g(n) \le f(n) \le c_2 g(n) \). Captures both upper and lower behavior simultaneously.
+- **Big-O ($ O $):** Upper Bound. $ f(n) \le c \cdot g(n) $ for all $ n \ge n_0 $. Guarantees the algorithm will run no slower than this bound.
+- **Big-Omega ($ \Omega $):** Lower Bound. $ f(n) \ge c \cdot g(n) $. Guarantees the algorithm will take at least this much time in the specified scenario.
+- **Big-Theta ($ \Theta $):** Tight Bound. $ c_1 g(n) \le f(n) \le c_2 g(n) $. Captures both upper and lower behavior simultaneously.

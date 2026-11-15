@@ -37,4 +37,4 @@ void backtrack(State& state, Choices& choices) {
     }
 }
 ```
-- **Pruning:** By checking `isValid(choice, state)` before recursing, backtracking cuts off entire branches of the exponential search space tree, transforming infeasible \( O(n!) \) searches into tractable algorithms.
+- **Pruning:** By checking `isValid(choice, state)` before recursing, backtracking cuts off entire branches of the exponential search space tree, transforming infeasible $ O(n!) $ searches into tractable algorithms.

@@ -19,8 +19,8 @@ A problem is solvable by a greedy algorithm if and only if it satisfies two stri
 
 | Problem / Algorithm | Greedy Metric / Choice | Optimal? | Contrast with Dynamic Programming |
 |---|---|---|---|
-| **Activity Selection / Interval Scheduling** | Earliest finishing time \( f_i \) | **Yes** | Sort by end time; non-overlapping greedy pick |
-| **Fractional Knapsack** | Highest value-to-weight ratio \( v_i / w_i \) | **Yes** | Can take fractional parts (0/1 Knapsack requires DP!) |
+| **Activity Selection / Interval Scheduling** | Earliest finishing time $ f_i $ | **Yes** | Sort by end time; non-overlapping greedy pick |
+| **Fractional Knapsack** | Highest value-to-weight ratio $ v_i / w_i $ | **Yes** | Can take fractional parts (0/1 Knapsack requires DP!) |
 | **Huffman Coding** | Combine two lowest frequency trees | **Yes** | Optimal prefix-free compression tree |
 | **Dijkstra's Shortest Path** | Extract vertex with minimum tentative distance | **Yes** (non-negative weights) | Greedy relaxation fails on negative edges |
 | **Kruskal's MST** | Add cheapest edge that does not form a cycle | **Yes** | Cut and cycle properties guarantee optimality |

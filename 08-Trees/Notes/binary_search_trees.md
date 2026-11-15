@@ -87,6 +87,9 @@ Once `root->data == node` is found:
 ## 5. Visual Representation
 
 ### 1. Building the BST in `BST_01.cpp` (`values = {50, 30, 70, 20, 40, 60, 80}`)
+
+![Binary search tree insertion, search, and deletion operations](../../assets/trees/bst-operations.svg)
+
 ```
                     50
                   /    \
@@ -224,6 +227,10 @@ Before Delete_Node(root, 50):          Step 1: Find Inorder Successor in right s
 
 ### Disadvantages
 - Without self-balancing rotations (AVL Tree or Red-Black Tree), sorted insertions cause $O(n)$ worst-case degradation.
+
+AVL trees use rotations to restore balance after updates:
+
+![AVL tree rotations that rebalance a binary search tree](../../assets/trees/avl-rotations.svg)
 
 ---
 

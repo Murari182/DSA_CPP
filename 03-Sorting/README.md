@@ -8,14 +8,14 @@ A comprehensive, mathematically rigorous, and visual textbook-style guide to ele
 
 | Algorithm | Best Case | Average Case | Worst Case | Auxiliary Space | Stable? | In-Place? | Adaptive? | Primary Advantage |
 |---|---|---|---|---|---|---|---|---|
-| **Bubble Sort** | \( O(n) \) | \( O(n^2) \) | \( O(n^2) \) | \( O(1) \) | **Yes** | **Yes** | **Yes** (with swap flag) | Conceptually simplest; early exit on sorted data |
-| **Insertion Sort** | \( O(n) \) | \( O(n^2) \) | \( O(n^2) \) | \( O(1) \) | **Yes** | **Yes** | **Yes** | Fastest for small or nearly-sorted arrays (\( n \le 16 \)) |
-| **Selection Sort** | \( O(n^2) \) | \( O(n^2) \) | \( O(n^2) \) | \( O(1) \) | **No** | **Yes** | **No** | Minimal memory writes (at most \( n - 1 \) swaps) |
-| **Merge Sort** | \( O(n \log n) \) | \( O(n \log n) \) | \( O(n \log n) \) | \( O(n) \) | **Yes** | **No** | **No** | Guaranteed \( O(n \log n) \); optimal for Linked Lists |
-| **Quick Sort** | \( O(n \log n) \) | \( O(n \log n) \) | \( O(n^2) \) | \( O(\log n) \) | **No** | **Yes** | **No** | Fastest general-purpose cache-friendly in-memory sort |
-| **Heap Sort** | \( O(n \log n) \) | \( O(n \log n) \) | \( O(n \log n) \) | \( O(1) \) | **No** | **Yes** | **No** | Guaranteed \( O(n \log n) \) with strictly \( O(1) \) auxiliary RAM |
-| **Counting Sort** | \( O(n + k) \) | \( O(n + k) \) | \( O(n + k) \) | \( O(k) \) | **Yes** | **No** | **No** | Linear time for small integer ranges (\( k \le n \)) |
-| **Radix Sort** | \( O(d(n + b)) \) | \( O(d(n + b)) \) | \( O(d(n + b)) \) | \( O(n + b) \) | **Yes** | **No** | **No** | Linear time for fixed-digit keys |
+| **Bubble Sort** | $ O(n) $ | $ O(n^2) $ | $ O(n^2) $ | $ O(1) $ | **Yes** | **Yes** | **Yes** (with swap flag) | Conceptually simplest; early exit on sorted data |
+| **Insertion Sort** | $ O(n) $ | $ O(n^2) $ | $ O(n^2) $ | $ O(1) $ | **Yes** | **Yes** | **Yes** | Fastest for small or nearly-sorted arrays ($ n \le 16 $) |
+| **Selection Sort** | $ O(n^2) $ | $ O(n^2) $ | $ O(n^2) $ | $ O(1) $ | **No** | **Yes** | **No** | Minimal memory writes (at most $ n - 1 $ swaps) |
+| **Merge Sort** | $ O(n \log n) $ | $ O(n \log n) $ | $ O(n \log n) $ | $ O(n) $ | **Yes** | **No** | **No** | Guaranteed $ O(n \log n) $; optimal for Linked Lists |
+| **Quick Sort** | $ O(n \log n) $ | $ O(n \log n) $ | $ O(n^2) $ | $ O(\log n) $ | **No** | **Yes** | **No** | Fastest general-purpose cache-friendly in-memory sort |
+| **Heap Sort** | $ O(n \log n) $ | $ O(n \log n) $ | $ O(n \log n) $ | $ O(1) $ | **No** | **Yes** | **No** | Guaranteed $ O(n \log n) $ with strictly $ O(1) $ auxiliary RAM |
+| **Counting Sort** | $ O(n + k) $ | $ O(n + k) $ | $ O(n + k) $ | $ O(k) $ | **Yes** | **No** | **No** | Linear time for small integer ranges ($ k \le n $) |
+| **Radix Sort** | $ O(d(n + b)) $ | $ O(d(n + b)) $ | $ O(d(n + b)) $ | $ O(n + b) $ | **Yes** | **No** | **No** | Linear time for fixed-digit keys |
 
 ---
 
@@ -28,7 +28,7 @@ Bubble Sort is a simple comparison-based sorting algorithm that repeatedly steps
 Bubble Sort serves as the classical foundational pedagogical model in Computer Science to introduce the concepts of pairwise comparisons, in-place swapping, invariant accumulation, and loop-termination flags.
 
 ### 3. Core Intuition
-Larger elements "bubble up" to the higher indices of the array like air bubbles rising in water. After pass \( i \), the \( i \)-th largest element is guaranteed to reside in its permanent sorted location at index \( n - i - 1 \).
+Larger elements "bubble up" to the higher indices of the array like air bubbles rising in water. After pass $ i $, the $ i $-th largest element is guaranteed to reside in its permanent sorted location at index $ n - i - 1 $.
 
 ### 4. Real-Life Analogy
 Arranging people in a queue by height by asking pairs of neighbors to swap if the person behind is shorter than the person in front.
@@ -84,28 +84,28 @@ void bubbleSort(std::vector<int>& arr) {
 
 ### 9. Dry Run
 Input: `[5, 1, 4, 2, 8]`  
-Outer \( i = 0 \): inner loops 4 times, 3 swaps, array becomes `[1, 4, 2, 5, 8]`.  
-Outer \( i = 1 \): inner loops 3 times, 1 swap, array becomes `[1, 2, 4, 5, 8]`.  
-Outer \( i = 2 \): inner loops 2 times, 0 swaps. `swapped == false` triggers early break.  
+Outer $ i = 0 $: inner loops 4 times, 3 swaps, array becomes `[1, 4, 2, 5, 8]`\
+Outer $ i = 1 $: inner loops 3 times, 1 swap, array becomes `[1, 2, 4, 5, 8]`\
+Outer $ i = 2 $: inner loops 2 times, 0 swaps. `swapped == false` triggers early break.\
 Output: `[1, 2, 4, 5, 8]`.
 
 ### 10. Time Complexity Derivation
-- Inner loop runs \( (n - 1) + (n - 2) + \dots + 1 = \frac{n(n - 1)}{2} \) times in the unoptimized or worst case.
-- Asymptotic time: \( \Theta(n^2) \).
+- Inner loop runs $ (n - 1) + (n - 2) + \dots + 1 = \frac{n(n - 1)}{2} $ times in the unoptimized or worst case.
+- Asymptotic time: $ \Theta(n^2) $.
 
 ### 11. Space Complexity Derivation
-Only requires a single boolean variable `swapped` and an integer counter: \( O(1) \) auxiliary space.
+Only requires a single boolean variable `swapped` and an integer counter: $ O(1) $ auxiliary space.
 
 ### 12–17. Classification
-- **Best Case:** \( O(n) \) (When array is already sorted and swap flag is used).
-- **Average Case:** \( O(n^2) \).
-- **Worst Case:** \( O(n^2) \) (Reverse sorted array).
+- **Best Case:** $ O(n) $ (When array is already sorted and swap flag is used).
+- **Average Case:** $ O(n^2) $.
+- **Worst Case:** $ O(n^2) $ (Reverse sorted array).
 - **Stable:** **Yes** (Strict inequality `arr[j] > arr[j+1]` ensures equal elements never swap).
-- **In-Place:** **Yes** (\( O(1) \) extra memory).
+- **In-Place:** **Yes** ($ O(1) $ extra memory).
 - **Adaptive:** **Yes** (With early exit flag).
 
 ### 18–21. Applications & Pitfalls
-- **Advantages:** Simple, detects already-sorted data in \( O(n) \).
+- **Advantages:** Simple, detects already-sorted data in $ O(n) $.
 - **Disadvantages:** Terribly slow on large inputs; excessive writes.
 - **When to Use:** Teaching; checking if an array is sorted.
 - **Common Mistake:** Forgetting the `- i` in `j < n - i - 1`, unnecessarily re-checking already sorted elements.
@@ -118,7 +118,7 @@ Only requires a single boolean variable `swapped` and an integer counter: \( O(1
 Insertion Sort builds the final sorted array one item at a time by repeatedly taking the next unsorted element and inserting it into its correct position within the already sorted prefix.
 
 ### 2. Why the Algorithm Exists
-It is the most efficient comparison sort for small collections (\( n \le 16 \)) and nearly sorted data due to zero function call overhead and minimal instructions per comparison.
+It is the most efficient comparison sort for small collections ($ n \le 16 $) and nearly sorted data due to zero function call overhead and minimal instructions per comparison.
 
 ### 3. Core Intuition
 Maintain a sorted left partition and an unsorted right partition. Pick the first element of the unsorted partition (`key`), shift all elements in the sorted partition that are greater than `key` one position to the right, and drop `key` into the resulting vacancy.
@@ -173,15 +173,15 @@ Key 8 shifts 0 → `[1, 2, 4, 5, 8]`
 Total memory writes are dramatically fewer than swap-based sorts.
 
 ### 10. Time Complexity Derivation
-If an array has \( k \) inversions, the inner loop executes exactly \( k \) times. Total time: \( O(n + k) \). In the worst case (reverse sorted), \( k = \frac{n(n-1)}{2} = O(n^2) \).
+If an array has $ k $ inversions, the inner loop executes exactly $ k $ times. Total time: $ O(n + k) $. In the worst case (reverse sorted), $ k = \frac{n(n-1)}{2} = O(n^2) $.
 
 ### 11. Space Complexity Derivation
-Auxiliary space is \( O(1) \) since it only stores `key` and loop counters.
+Auxiliary space is $ O(1) $ since it only stores `key` and loop counters.
 
 ### 12–17. Classification
-- **Best Case:** \( O(n) \) (Already sorted, while-loop terminates on first comparison).
-- **Average Case:** \( O(n^2) \).
-- **Worst Case:** \( O(n^2) \).
+- **Best Case:** $ O(n) $ (Already sorted, while-loop terminates on first comparison).
+- **Average Case:** $ O(n^2) $.
+- **Worst Case:** $ O(n^2) $.
 - **Stable:** **Yes**.
 - **In-Place:** **Yes**.
 - **Adaptive:** **Yes** (Directly proportional to number of inversions).
@@ -198,7 +198,7 @@ Auxiliary space is \( O(1) \) since it only stores `key` and loop counters.
 Selection Sort divides the input list into a sorted prefix and an unsorted suffix. In each pass, it finds the smallest element from the unsorted suffix and swaps it with the first unsorted element.
 
 ### 2. Why the Algorithm Exists
-It minimizes the total number of write operations. While other \( O(n^2) \) algorithms perform \( O(n^2) \) swaps, Selection Sort executes **at most \( n - 1 \) swaps**.
+It minimizes the total number of write operations. While other $ O(n^2) $ algorithms perform $ O(n^2) $ swaps, Selection Sort executes **at most $ n - 1 $ swaps**.
 
 ### 3. Core Intuition
 Scan the unsorted portion, find the global minimum, and swap it into the boundary. Repeat until sorted.
@@ -246,8 +246,8 @@ void selectionSort(std::vector<int>& arr) {
 ```
 
 ### 9–17. Complexity & Classification
-- **Time Complexity:** Strictly \( \Theta(n^2) \) across best, average, and worst cases (\( \frac{n(n-1)}{2} \) comparisons always).
-- **Auxiliary Space:** \( O(1) \).
+- **Time Complexity:** Strictly $ \Theta(n^2) $ across best, average, and worst cases ($ \frac{n(n-1)}{2} $ comparisons always).
+- **Auxiliary Space:** $ O(1) $.
 - **Stable:** **No** (Long-distance swaps bypass equal elements, e.g. `[4a, 4b, 2]` becomes `[2, 4b, 4a]`).
 - **In-Place:** **Yes**.
 - **Adaptive:** **No**.
@@ -264,7 +264,7 @@ void selectionSort(std::vector<int>& arr) {
 Merge Sort is an efficient, general-purpose, comparison-based, divide-and-conquer sorting algorithm.
 
 ### 2. Why the Algorithm Exists
-It provides a guaranteed \( O(n \log n) \) time complexity in all cases while maintaining absolute **stability**.
+It provides a guaranteed $ O(n \log n) $ time complexity in all cases while maintaining absolute **stability**.
 
 ### 3. Core Intuition
 Divide the array into two halves, recursively sort both halves, and then combine the two sorted halves using a linear two-pointer merge subroutine.
@@ -327,15 +327,15 @@ void mergeSort(std::vector<int>& arr, int left, int right) {
 ```
 
 ### 9–17. Complexity & Classification
-- **Recurrence:** \( T(n) = 2T(n/2) + O(n) \).
-- **Time Complexity:** \( \Theta(n \log n) \) in Best, Average, and Worst cases (by Master Theorem).
-- **Auxiliary Space:** \( O(n) \) for temporary merge arrays + \( O(\log n) \) recursion stack.
+- **Recurrence:** $ T(n) = 2T(n/2) + O(n) $.
+- **Time Complexity:** $ \Theta(n \log n) $ in Best, Average, and Worst cases (by Master Theorem).
+- **Auxiliary Space:** $ O(n) $ for temporary merge arrays + $ O(\log n) $ recursion stack.
 - **Stable:** **Yes**.
 - **In-Place:** **No** (Standard array implementation).
 - **Adaptive:** **No** (Standard implementation).
 
 ### 18–21. Applications & Pitfalls
-- **Advantages:** Guaranteed \( O(n \log n) \); ideal for **Linked Lists** where merging requires \( O(1) \) pointer re-linking without extra array allocations; external sorting (sorting petabytes on disk).
+- **Advantages:** Guaranteed $ O(n \log n) $; ideal for **Linked Lists** where merging requires $ O(1) $ pointer re-linking without extra array allocations; external sorting (sorting petabytes on disk).
 - **Common Mistake:** Writing `mid = (left + right) / 2`, which can overflow 32-bit signed integers when `left + right > 2^31 - 1`. Always write `left + (right - left) / 2`!
 
 ---
@@ -356,11 +356,11 @@ Organizing a library shelf by picking a book starting with letter 'M'. Put all b
 
 ### 5. Step-by-Step Example (Lomuto Scheme)
 Array: `[5, 2, 8, 1, 4]`, Pivot = 4 @ arr[4].
-- Pointers: \( i = -1 \).
-- \( j = 0 \) (5 > 4): do nothing.
-- \( j = 1 \) (2 <= 4): \( i = 0 \), swap arr[0], arr[1] → `[2, 5, 8, 1, 4]`
-- \( j = 2 \) (8 > 4): do nothing.
-- \( j = 3 \) (1 <= 4): \( i = 1 \), swap arr[1], arr[3] → `[2, 1, 8, 5, 4]`
+- Pointers: $ i = -1 $.
+- $ j = 0 $ (5 > 4): do nothing.
+- $ j = 1 $ (2 <= 4): $ i = 0 $, swap arr[0], arr[1] → `[2, 5, 8, 1, 4]`
+- $ j = 2 $ (8 > 4): do nothing.
+- $ j = 3 $ (1 <= 4): $ i = 1 $, swap arr[1], arr[3] → `[2, 1, 8, 5, 4]`
 - Final: swap arr[i+1], arr[4] → `[2, 1, 4, 5, 8]`. Pivot 4 is in its exact sorted place!
 
 ### 6. Visual Explanation
@@ -383,10 +383,10 @@ partition(arr, low, high):
 (See full verified code in [05_quick_sort.cpp](file:///c:/Users/LENOVO/Documents/Mukunda/DSA_CPP/03-Sorting/05_quick_sort.cpp)).
 
 ### 9–17. Complexity & Classification
-- **Best Case:** \( O(n \log n) \) (Balanced 50/50 splits).
-- **Average Case:** \( O(n \log n) \) (\( \approx 1.39 n \log n \)).
-- **Worst Case:** \( O(n^2) \) (When pivot is always minimum or maximum, e.g. already sorted array with last-element pivot).
-- **Auxiliary Space:** \( O(\log n) \) call stack (with tail call elimination).
+- **Best Case:** $ O(n \log n) $ (Balanced 50/50 splits).
+- **Average Case:** $ O(n \log n) $ ($ \approx 1.39 n \log n $).
+- **Worst Case:** $ O(n^2) $ (When pivot is always minimum or maximum, e.g. already sorted array with last-element pivot).
+- **Auxiliary Space:** $ O(\log n) $ call stack (with tail call elimination).
 - **Stable:** **No**.
 - **In-Place:** **Yes**.
 - **Adaptive:** **No**.
@@ -395,7 +395,7 @@ partition(arr, low, high):
 - **Mitigating Worst-Case:**
   1. **Randomized Quick Sort:** Choose a random pivot index.
   2. **Median-of-Three:** Pick median of `arr[low]`, `arr[mid]`, `arr[high]`.
-  3. **Introsort:** Switch to Heap Sort if recursion exceeds \( 2 \log n \) (used in `std::sort`).
+  3. **Introsort:** Switch to Heap Sort if recursion exceeds $ 2 \log n $ (used in `std::sort`).
 
 ---
 
@@ -405,7 +405,7 @@ partition(arr, low, high):
 Heap Sort is a comparison-based sorting technique based on a **Binary Heap** data structure.
 
 ### 2. Why the Algorithm Exists
-It combines the \( O(n \log n) \) worst-case guarantee of Merge Sort with the \( O(1) \) auxiliary in-place memory efficiency of Quick Sort.
+It combines the $ O(n \log n) $ worst-case guarantee of Merge Sort with the $ O(1) $ auxiliary in-place memory efficiency of Quick Sort.
 
 ### 3. Core Intuition
 Convert the array into a Max-Heap. The root `arr[0]` is guaranteed to be the maximum. Repeatedly swap the root with the last element of the heap, shrink the heap size by 1, and heapify the new root down.
@@ -426,8 +426,8 @@ Array: `[5, 1, 4, 2, 8]`
 (See full verified code in [06_heap_sort.cpp](file:///c:/Users/LENOVO/Documents/Mukunda/DSA_CPP/03-Sorting/06_heap_sort.cpp)).
 
 ### 7–12. Complexity & Classification
-- **Time Complexity:** Guaranteed \( \Theta(n \log n) \) in all cases (Build Heap = \( O(n) \), \( n \) extractions \( \times O(\log n) \)).
-- **Auxiliary Space:** Strictly \( O(1) \).
+- **Time Complexity:** Guaranteed $ \Theta(n \log n) $ in all cases (Build Heap = $ O(n) $, $ n $ extractions $ \times O(\log n) $).
+- **Auxiliary Space:** Strictly $ O(1) $.
 - **Stable:** **No**.
 - **In-Place:** **Yes**.
 - **Adaptive:** **No**.
@@ -436,14 +436,14 @@ Array: `[5, 1, 4, 2, 8]`
 
 # 7. Non-Comparison Sorts (Counting & Radix Sort)
 
-Comparison-based sorting has a proven mathematical lower bound of \( \Omega(n \log n) \) (derived from decision trees of height \( \log_2(n!) \approx n \log n - n \log e \)). Non-comparison algorithms bypass this lower bound by exploiting numerical key representations!
+Comparison-based sorting has a proven mathematical lower bound of $ \Omega(n \log n) $ (derived from decision trees of height $ \log_2(n!) \approx n \log n - n \log e $). Non-comparison algorithms bypass this lower bound by exploiting numerical key representations!
 
 ### Counting Sort
 - **Intuition:** Tally frequencies of elements in an auxiliary count array, calculate prefix sums to determine exact output positions, and place elements into an output array from right to left (preserving stability).
-- **Complexity:** Time: \( O(n + k) \), Space: \( O(n + k) \) where \( k = \text{max} - \text{min} + 1 \).
-- **Ideal For:** Small key ranges (\( k = O(n) \)).
+- **Complexity:** Time: $ O(n + k) $, Space: $ O(n + k) $ where $ k = \text{max} - \text{min} + 1 $.
+- **Ideal For:** Small key ranges ($ k = O(n) $).
 
 ### Radix Sort (LSD)
 - **Intuition:** Sort numbers digit by digit from least significant to most significant using stable Counting Sort as a subroutine.
-- **Complexity:** Time: \( O(d \cdot (n + b)) \), Space: \( O(n + b) \) where \( d \) is the number of digits and \( b \) is the base (e.g. 10).
+- **Complexity:** Time: $ O(d \cdot (n + b)) $, Space: $ O(n + b) $ where $ d $ is the number of digits and $ b $ is the base (e.g. 10).
 - **Ideal For:** Fixed-length keys, phone numbers, 32-bit integers, strings.

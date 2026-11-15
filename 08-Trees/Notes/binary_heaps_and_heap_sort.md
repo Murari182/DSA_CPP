@@ -106,6 +106,9 @@ Given a valid Max Heap in `arr[0 .. size - 1]`:
 ## 5. Visual Representation
 
 ### 1. Max Heap Array & Tree View (`{100, 50, 70, 20, 40, 60}`)
+
+![Heap sort: max-heap structure and extraction order](../../assets/sorting/heap-sort.svg)
+
 ```
                  100 (idx 0)
                /             \

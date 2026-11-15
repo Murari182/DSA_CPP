@@ -82,6 +82,14 @@ Sorted data is a prerequisite for Binary Search ($O(\log n)$), two-pointer algor
 
 ## 5. Visual Representation
 
+The diagrams below show the key operation in each algorithm:
+
+![Bubble sort: comparing and swapping adjacent elements](../../assets/sorting/bubble-sort.svg)
+
+![Selection sort: selecting the next minimum element](../../assets/sorting/selection-sort.svg)
+
+![Insertion sort: shifting elements to insert the key](../../assets/sorting/insertion-sort.svg)
+
 ### Partitioning of the Array During Sorting
 ```
 1. Bubble Sort (Sorted Suffix grows from right to left):

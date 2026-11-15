@@ -9,11 +9,11 @@ A comprehensive, mathematically rigorous, and visual textbook-style guide to lin
 | Dimension | Dynamic Array (`std::vector`) | Singly Linked List | Doubly Linked List |
 |---|---|---|---|
 | **Memory Allocation** | Single contiguous buffer on heap | Disjoint nodes scattered across heap | Disjoint nodes scattered across heap |
-| **Access by Index `arr[k]`** | \( O(1) \) direct pointer arithmetic | \( O(k) \) sequential traversal | \( O(\min(k, n-k)) \) sequential traversal |
-| **Insert / Delete at Front** | \( O(n) \) (Requires shifting all elements) | \( O(1) \) (Single pointer re-link) | \( O(1) \) (Two pointer re-links) |
-| **Insert / Delete at End** | \( O(1) \) amortized | \( O(1) \) (with tail ptr) / \( O(n) \) | \( O(1) \) (with tail ptr) |
-| **Insert / Delete at Position \( k \)** | \( O(n) \) (Shifting elements) | \( O(k) \) traversal + \( O(1) \) pointer rewire | \( O(k) \) traversal + \( O(1) \) pointer rewire |
-| **Delete Node (given pointer to it)** | \( O(n) \) (Must shift elements left) | \( O(n) \) (Must find predecessor) | **\( O(1) \)** (Immediate pointer bypass) |
+| **Access by Index `arr[k]`** | $ O(1) $ direct pointer arithmetic | $ O(k) $ sequential traversal | $ O(\min(k, n-k)) $ sequential traversal |
+| **Insert / Delete at Front** | $ O(n) $ (Requires shifting all elements) | $ O(1) $ (Single pointer re-link) | $ O(1) $ (Two pointer re-links) |
+| **Insert / Delete at End** | $ O(1) $ amortized | $ O(1) $ (with tail ptr) / $ O(n) $ | $ O(1) $ (with tail ptr) |
+| **Insert / Delete at Position $ k $** | $ O(n) $ (Shifting elements) | $ O(k) $ traversal + $ O(1) $ pointer rewire | $ O(k) $ traversal + $ O(1) $ pointer rewire |
+| **Delete Node (given pointer to it)** | $ O(n) $ (Must shift elements left) | $ O(n) $ (Must find predecessor) | **$ O(1) $** (Immediate pointer bypass) |
 | **Memory Overhead per Element** | 0 bytes extra (pure contiguous data) | 8 bytes per node (`next` pointer) | 16 bytes per node (`prev` + `next` pointers) |
 | **CPU Cache Locality** | **Excellent** (Hardware prefetching) | **Poor** (Frequent L1/L2 cache misses) | **Poor** (Frequent L1/L2 cache misses) |
 
@@ -47,15 +47,15 @@ struct Node {
 
 ### A. Insertion at Beginning (Push Front)
 - **Mechanism:** Create new node `newNode`. Point `newNode->next = head`. Update `head = newNode`.
-- **Time Complexity:** Strictly \( O(1) \).
+- **Time Complexity:** Strictly $ O(1) $.
 - **Edge Cases:** Empty list (`head == nullptr`) works identically without special branching!
 
 ### B. Insertion at End (Push Back)
-- **Without Tail Pointer:** Traverse from `head` until `curr->next == nullptr` (\( O(n) \) steps). Set `curr->next = newNode`.
-- **With Tail Pointer:** Set `tail->next = newNode; tail = newNode;` (\( O(1) \) steps!).
+- **Without Tail Pointer:** Traverse from `head` until `curr->next == nullptr` ($ O(n) $ steps). Set `curr->next = newNode`.
+- **With Tail Pointer:** Set `tail->next = newNode; tail = newNode;` ($ O(1) $ steps!).
 
-### C. Insertion at Position \( k \)
-- **Mechanism:** Traverse to node at position \( k - 1 \). Set `newNode->next = curr->next`. Set `curr->next = newNode`.
+### C. Insertion at Position $ k $
+- **Mechanism:** Traverse to node at position $ k - 1 $. Set `newNode->next = curr->next`. Set `curr->next = newNode`.
 - **Order of Operations Trap:** If you execute `curr->next = newNode` before saving `curr->next`, you orphan and permanently lose the rest of the linked list!
 
 ### D. Deletion of a Node
@@ -81,8 +81,8 @@ struct Node {
 };              // Total sizeof(Node) = 24 bytes
 ```
 
-### The DLL Superpower: True \( O(1) \) Deletion
-In a singly linked list, even if you are handed a direct pointer to the node you want to delete, you **cannot** delete it in \( O(1) \) because you cannot access its predecessor to update the `next` pointer without traversing from `head`.
+### The DLL Superpower: True $ O(1) $ Deletion
+In a singly linked list, even if you are handed a direct pointer to the node you want to delete, you **cannot** delete it in $ O(1) $ because you cannot access its predecessor to update the `next` pointer without traversing from `head`.
 In a Doubly Linked List, the predecessor is immediately accessible via `target->prev`:
 ```cpp
 void deleteNode(Node* target) {
@@ -104,9 +104,9 @@ In a **Circular Linked List**, the last node (`tail`) does not point to `nullptr
 
 ### The Single `tail` Pointer Design
 By maintaining a single pointer to `tail`:
-- `head = tail->next` is accessible in \( O(1) \).
-- `tail` is accessible in \( O(1) \).
-- Inserting at the front or back takes strictly \( O(1) \) time with minimal state management!
+- `head = tail->next` is accessible in $ O(1) $.
+- `tail` is accessible in $ O(1) $.
+- Inserting at the front or back takes strictly $ O(1) $ time with minimal state management!
 
 ---
 
@@ -115,7 +115,7 @@ By maintaining a single pointer to `tail`:
 ![Reversing a Linked List](../assets/linked-lists/reverse-linked-list.svg)
 
 ### The 3-Pointer Iterative Reversal Algorithm
-To invert the direction of every `next` pointer in an \( n \)-node singly linked list in-place:
+To invert the direction of every `next` pointer in an $ n $-node singly linked list in-place:
 ```cpp
 Node* reverseList(Node* head) {
     Node* prev = nullptr;
@@ -131,8 +131,8 @@ Node* reverseList(Node* head) {
     return prev; // prev now points to the new Head!
 }
 ```
-- **Time Complexity:** \( O(n) \) (Visits each node exactly once).
-- **Auxiliary Space:** \( O(1) \) (Uses 3 raw pointers; zero heap allocations).
+- **Time Complexity:** $ O(n) $ (Visits each node exactly once).
+- **Auxiliary Space:** $ O(1) $ (Uses 3 raw pointers; zero heap allocations).
 
 ---
 
@@ -140,7 +140,7 @@ Node* reverseList(Node* head) {
 
 ![Floyd's Cycle Detection](../assets/linked-lists/floyd-cycle-detection.svg)
 
-Detects whether a linked list contains a cycle, and if so, locates the exact starting node of the cycle in \( O(n) \) time and \( O(1) \) auxiliary space.
+Detects whether a linked list contains a cycle, and if so, locates the exact starting node of the cycle in $ O(n) $ time and $ O(1) $ auxiliary space.
 
 ### The Algorithm
 1. Initialize two pointers at `head`: `slow` and `fast`.
@@ -153,9 +153,9 @@ Detects whether a linked list contains a cycle, and if so, locates the exact sta
 
 ### The Exact Mathematical Proof
 Let:
-- \( L \): Distance from `head` to cycle entrance.
-- \( C \): Perimeter / length of the cycle.
-- \( x \): Distance from cycle entrance to meeting point \( M \).
+- $ L $: Distance from `head` to cycle entrance.
+- $ C $: Perimeter / length of the cycle.
+- $ x $: Distance from cycle entrance to meeting point $ M $.
 
 When `slow` and `fast` meet:
 ```math
@@ -174,11 +174,11 @@ Because `fast` moves at twice the speed of `slow`:
 ```math
 2L + 2x = L + x + nC \implies L + x = nC
 ```
-Rearranging for \( L \):
+Rearranging for $ L $:
 ```math
 L = nC - x = (n - 1)C + (C - x)
 ```
-**Conclusion:** The distance from `head` to the cycle entrance (\( L \)) is mathematically equivalent to the remaining distance from meeting point \( M \) back to the cycle entrance (\( C - x \)), modulo cycle length \( C \). Advancing both pointers by 1 step guarantees collision at the cycle entrance!
+**Conclusion:** The distance from `head` to the cycle entrance ($ L $) is mathematically equivalent to the remaining distance from meeting point $ M $ back to the cycle entrance ($ C - x $), modulo cycle length $ C $. Advancing both pointers by 1 step guarantees collision at the cycle entrance!
 
 ---
 

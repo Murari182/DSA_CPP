@@ -85,6 +85,9 @@ Let $U$ be the number of pointer assignments required in the general middle-of-l
 ## 5. Visual Representation
 
 ### 1. Doubly Linked List Node Structure & 4-Pointer Insertion
+
+![Doubly linked list nodes with next and previous links](../../assets/linked-lists/doubly-linked-list.svg)
+
 ```
        head                                              tail
         |                                                 |
@@ -103,6 +106,9 @@ Order of pointer assignments when inserting n1 (30) after temp (20):
 ```
 
 ### 2. Circular Linked List (`clinked.cpp`)
+
+![Circular linked list with the tail linked back to the head](../../assets/linked-lists/circular-linked-list.svg)
+
 ```
         head                                      tail
          |                                         |

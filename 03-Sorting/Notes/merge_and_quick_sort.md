@@ -85,6 +85,9 @@ $$T(n) = \Theta(n \log n)$$
 ## 5. Visual Representation
 
 ### 1. Merge Sort Divide & Combine Tree on `{38, 27, 43, 3}`
+
+![Merge sort: splitting the input and merging sorted halves](../../assets/sorting/merge-sort.svg)
+
 ```
                   [38, 27, 43, 3]
                  /               \          <-- DIVIDE
@@ -98,6 +101,9 @@ $$T(n) = \Theta(n \log n)$$
 ```
 
 ### 2. Lomuto Partition Invariant
+
+![Quick sort: partitioning values around a pivot](../../assets/sorting/quick-sort.svg)
+
 ```
 Index:   low           i                 j          high
         +---------------+---------------+----------+-------+

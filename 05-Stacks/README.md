@@ -32,14 +32,14 @@ A comprehensive module covering the Last-In-First-Out (LIFO) discipline, array-b
 ```
 
 ### Core Operations
-- `push(x)`: Inserts element \( x \) on top of the stack. Time: \( O(1) \).
-- `pop()`: Removes the topmost element. Time: \( O(1) \).
-- `top()` / `peek()`: Returns the topmost element without removing it. Time: \( O(1) \).
-- `empty()`: Returns true if stack contains 0 elements. Time: \( O(1) \).
+- `push(x)`: Inserts element $ x $ on top of the stack. Time: $ O(1) $.
+- `pop()`: Removes the topmost element. Time: $ O(1) $.
+- `top()` / `peek()`: Returns the topmost element without removing it. Time: $ O(1) $.
+- `empty()`: Returns true if stack contains 0 elements. Time: $ O(1) $.
 
 ---
 
 ## Monotonic Stack Pattern
 A monotonic stack maintains elements in strictly increasing or decreasing order.
 - **Key Applications:** Next Greater Element, Next Smaller Element, Largest Rectangle in Histogram, Daily Temperatures.
-- **Complexity:** Amortized \( O(n) \) time because each element is pushed and popped at most once!
+- **Complexity:** Amortized $ O(n) $ time because each element is pushed and popped at most once!

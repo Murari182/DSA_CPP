@@ -215,7 +215,7 @@ arr[1].push_back(3);
 
 `push_back()` appends an element to the end of the list.
 
-For `std::list`, insertion at the end is constant time, \(O(1)\), assuming the usual container operation and excluding allocator overhead.
+For `std::list`, insertion at the end is constant time, $O(1)$, assuming the usual container operation and excluding allocator overhead.
 
 A list also grows as elements are inserted. We do not need to specify the maximum number of neighbours in advance.
 
@@ -783,8 +783,8 @@ For a production-quality raw-pointer class, copy and move operations must be des
 
 Let:
 
-- \(V\) = Number of vertices.
-- \(E\) = Number of edges.
+- $V$ = Number of vertices.
+- $E$ = Number of edges.
 
 ## 12.1 Constructor
 
@@ -794,7 +794,7 @@ arr = new list<int>[V];
 
 Creates `V` list objects.
 
-Time complexity: \(O(V)\), because the array elements must be constructed.
+Time complexity: $O(V)$, because the array elements must be constructed.
 
 ## 12.2 Inserting an undirected edge
 
@@ -805,13 +805,13 @@ arr[y].push_back(x);
 
 Two list insertions occur.
 
-Each `push_back()` is \(O(1)\) for `std::list`.
+Each `push_back()` is $O(1)$ for `std::list`.
 
 Therefore:
 
-\[
+$$
 O(1)+O(1)=O(1)
-\]
+$$
 
 ## 12.3 Inserting a directed edge
 
@@ -821,24 +821,24 @@ arr[x].push_back(y);
 
 One insertion:
 
-\[
+$$
 O(1)
-\]
+$$
 
 ## 12.4 Printing the entire adjacency list
 
-The outer loop visits all vertices: \(O(V)\).
+The outer loop visits all vertices: $O(V)$.
 
 The inner loops collectively visit every adjacency entry.
 
-- Directed graph: \(E\) entries.
-- Undirected graph: \(2E\) entries, assuming no special self-loop convention.
+- Directed graph: $E$ entries.
+- Undirected graph: $2E$ entries, assuming no special self-loop convention.
 
 Therefore:
 
-\[
+$$
 O(V+E)
-\]
+$$
 
 ## 12.5 Space complexity
 
@@ -851,11 +851,11 @@ The lists collectively store:
 
 Therefore:
 
-\[
+$$
 \boxed{O(V+E)}
-\]
+$$
 
-The asymptotic space complexity is \(O(V+E)\).
+The asymptotic space complexity is $O(V+E)$.
 
 ---
 
