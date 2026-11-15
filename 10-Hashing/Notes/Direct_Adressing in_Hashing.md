@@ -13,7 +13,9 @@ keys using an array called a **direct-address table**.
 The key itself is used as the index of the array. We do not calculate a
 separate hash value.
 
-\[ h(key)=key \]
+$$
+h(key)=key
+$$
 
 For example, if the keys are `2, 4, 6, 8`, they are stored at indices
 `2, 4, 6, 8`, respectively.
@@ -25,18 +27,18 @@ A simple table can use:
 
 Example, for a table of size 10:
 
-    Index   Value Meaning
-  ------- ------- ---------------
-        0       0 Key 0 absent
-        1       0 Key 1 absent
-        2       1 Key 2 present
-        3       0 Key 3 absent
-        4       1 Key 4 present
-        5       0 Key 5 absent
-        6       1 Key 6 present
-        7       0 Key 7 absent
-        8       1 Key 8 present
-        9       0 Key 9 absent
+| Index | Value | Meaning |
+|---:|---:|---|
+| 0 | 0 | Key 0 absent |
+| 1 | 0 | Key 1 absent |
+| 2 | 1 | Key 2 present |
+| 3 | 0 | Key 3 absent |
+| 4 | 1 | Key 4 present |
+| 5 | 0 | Key 5 absent |
+| 6 | 1 | Key 6 present |
+| 7 | 0 | Key 7 absent |
+| 8 | 1 | Key 8 present |
+| 9 | 0 | Key 9 absent |
 
 The table stores the *presence* of a key. It does not need to store the
 key again because its index already identifies it.
@@ -193,14 +195,14 @@ absent.
 
 ### Complexity
 
-  Operation                      Time complexity
-  ---------------------------- -----------------
-  Insertion                               (O(1))
-  Searching                               (O(1))
-  Deletion                                (O(1))
-  Displaying the whole table              (O(M))
+| Operation | Time complexity |
+|---|---:|
+| Insertion | $O(1)$ |
+| Searching | $O(1)$ |
+| Deletion | $O(1)$ |
+| Displaying the whole table | $O(M)$ |
 
-Here, (M) is the size of the direct-address table.
+Here, $M$ is the size of the direct-address table.
 
 ## 3. Limitation of a fixed-size array
 
@@ -219,13 +221,13 @@ An array of size 100 has valid indices from 0 to 99. Accessing
 The fundamental limitation is that the table must be large enough to
 include every possible key.
 
-    Key/index to be accessed   Minimum array size
-  -------------------------- --------------------
-                          10                   11
-                         100                  101
-                       1,000                1,001
-                   1,000,000            1,000,001
-               1,000,000,000        1,000,000,001
+| Key/index to be accessed | Minimum array size |
+|---:|---:|
+| 10 | 11 |
+| 100 | 101 |
+| 1,000 | 1,001 |
+| 1,000,000 | 1,000,001 |
+| 1,000,000,000 | 1,000,000,001 |
 
 This can require a huge amount of memory, even if only a few keys are
 actually stored.
@@ -270,7 +272,9 @@ vector<int> arr(100, 0);
 
 The vector contains 100 zero-initialized elements.
 
-\[ `\text{size}`{=tex}=100 \]
+$$
+\text{size}=100
+$$
 
 Valid indices: 0 to 99.
 
@@ -290,7 +294,9 @@ if(key >= arr.size())
 
 Substituting the values:
 
-\[ 150 `\geq 100`{=tex} \]
+$$
+150 \geq 100
+$$
 
 The condition is true, so the vector must be expanded.
 
@@ -302,7 +308,9 @@ arr.resize(key + 1, 0);
 
 Substitute:
 
-\[ key+1=150+1=151 \]
+$$
+key+1=150+1=151
+$$
 
 This becomes:
 
@@ -325,17 +333,19 @@ elements.
 
 In general:
 
-\[ `\boxed{\text{Minimum size required to access index } k=k+1}`{=tex}
-\]
+$$
+\boxed{\text{Minimum size required to access index } k=k+1}
+
+$$
 
 Examples:
 
-    Required index   Minimum vector size
-  ---------------- ---------------------
-                 5                     6
-                10                    11
-                75                    76
-               150                   151
+| Required index | Minimum vector size |
+|---:|---:|
+| 5 | 6 |
+| 10 | 11 |
+| 75 | 76 |
+| 150 | 151 |
 
 **Step 5 --- Insert the key**
 
@@ -490,13 +500,13 @@ if(key >= arr.size())
 This checks whether the required index is outside the current vector
 size.
 
-    Current size   Key Condition     New size
-  -------------- ----- ----------- ----------
-             100    50 False              100
-             100    99 False              100
-             100   100 True               101
-             100   150 True               151
-             100   200 True               201
+| Current size | Key | Condition | New size |
+|---:|---:|:---:|---:|
+| 100 | 50 | False | 100 |
+| 100 | 99 | False | 100 |
+| 100 | 100 | True | 101 |
+| 100 | 150 | True | 151 |
+| 100 | 200 | True | 201 |
 
 If the index is already valid, no resizing is required.
 
@@ -504,16 +514,10 @@ If the index is already valid, no resizing is required.
 
 These two vector functions have different meanings.
 
-  -----------------------------------------------------------------------
-  Function                            Meaning
-  ----------------------------------- -----------------------------------
-  `arr.size()`                        Number of elements currently in the
-                                      vector
-
-  `arr.capacity()`                    Number of elements the vector can
-                                      hold in its currently allocated
-                                      storage without another allocation
-  -----------------------------------------------------------------------
+| Function | Meaning |
+|---|---|
+| `arr.size()` | Number of elements currently in the vector |
+| `arr.capacity()` | Number of elements the vector can hold in its currently allocated storage without another allocation |
 
 Example:
 
@@ -558,16 +562,16 @@ the vector still has zero elements.
 
 Let:
 
--   \(M\) be the fixed size of the normal array.
--   \(K\) be the vector's size after expansion.
+-   $M$ be the fixed size of the normal array.
+-   $K$ be the vector's size after expansion.
 
-  Operation                          Fixed array              Vector
-  ------------------------------- -------------- -------------------
-  Insertion when index exists             (O(1))              (O(1))
-  Insertion requiring expansion     Not possible   (O(K)) worst case
-  Searching                               (O(1))              (O(1))
-  Deletion                                (O(1))              (O(1))
-  Displaying all indices                  (O(M))              (O(K))
+| Operation | Fixed array | Vector |
+|---|---:|---:|
+| Insertion when index exists | $O(1)$ | $O(1)$ |
+| Insertion requiring expansion | Not possible | $O(K)$ worst case |
+| Searching | $O(1)$ | $O(1)$ |
+| Deletion | $O(1)$ | $O(1)$ |
+| Displaying all indices | $O(M)$ | $O(K)$ |
 
 A vector resize that requires a new allocation may move or copy the
 existing elements. Therefore, resizing can take linear time in the
@@ -580,8 +584,8 @@ reserve a suitable range in advance.
 
 Space complexity:
 
--   Fixed array: (O(M)).
--   Vector: (O(K)), where (K) is the largest allocated index plus one.
+- Fixed array: $O(M)$.
+- Vector: $O(K)$, where $K$ is the largest allocated index plus one.
 
 ## 8. Direct Addressing vs ordinary hashing
 
@@ -589,13 +593,17 @@ This is the important connection between Direct Addressing and hashing.
 
 Suppose:
 
-\[ key=150 \]
+$$
+key=150
+$$
 
 ### Direct Addressing
 
 The key itself is the index:
 
-\[ h(150)=150 \]
+$$
+h(150)=150
+$$
 
 So the key is represented at index 150.
 
@@ -603,31 +611,25 @@ So the key is represented at index 150.
 
 Suppose we use this hash function:
 
-\[ h(key)=key `\bmod 10`{=tex} \]
+$$
+h(key)=key \bmod 10
+$$
 
 Then:
 
-\[ h(150)=150 `\bmod 10`{=tex}=0 \]
+$$
+h(150)=150 \bmod 10=0
+$$
 
 The key maps to index 0 in a table of size 10.
 
-  -----------------------------------------------------------------------
-  Property                Direct Addressing       Hashing
-  ----------------------- ----------------------- -----------------------
-  Index calculation       Key itself              Hash function
-
-  Large keys              Need a table covering   Can map keys into a
-                          the key range           smaller table
-
-  Collisions              No collisions for       Collisions are possible
-                          distinct keys           
-
-  Memory requirement      Depends on the key      Depends mainly on table
-                          universe                capacity
-
-  Search                  (O(1))                  Average (O(1)), under
-                                                  suitable assumptions
-  -----------------------------------------------------------------------
+| Property | Direct Addressing | Hashing |
+|---|---|---|
+| Index calculation | Key itself | Hash function |
+| Large keys | Requires a table covering the key range | Maps keys into a smaller table |
+| Collisions | No collisions for distinct keys | Collisions are possible |
+| Memory requirement | Depends on the key universe | Depends mainly on table capacity |
+| Search | $O(1)$ | Average $O(1)$ under suitable assumptions |
 
 Hashing can produce collisions because different keys may map to the
 same index. Collision resolution techniques include:
@@ -647,11 +649,15 @@ Addressing.
 
 For example, if the key is:
 
-\[ 10\^9 \]
+$$
+10^9
+$$
 
 The vector still needs at least:
 
-\[ 10\^9+1 \]
+$$
+10^9+1
+$$
 
 elements to access that key directly.
 
@@ -681,38 +687,21 @@ Try these without looking at the explanations above.
 
 ## 10. Quick revision sheet
 
-  -----------------------------------------------------------------------
-  Concept                             Key point
-  ----------------------------------- -----------------------------------
-  Direct Addressing                   The key itself is the array index
-
-  Direct-address function             (h(key)=key)
-
-  Insertion                           `arr[key] = 1`
-
-  Searching                           Check `arr[key] == 1`
-
-  Deletion                            `arr[key] = 0`
-
-  Fixed array limitation              Cannot safely access an index
-                                      outside its bounds
-
-  Vector                              Can dynamically increase its size
-
-  `resize()`                          Changes the number of elements
-
-  `size()`                            Number of current elements
-
-  `capacity()`                        Allocated storage available before
-                                      another allocation
-
-  Minimum size for index (k)          (k+1)
-
-  Vector memory limitation            Still depends on the largest key
-
-  Hashing                             Maps keys to table indices using a
-                                      hash function
-  -----------------------------------------------------------------------
+| Concept | Key point |
+|---|---|
+| Direct Addressing | The key itself is the array index |
+| Direct-address function | $h(key)=key$ |
+| Insertion | `arr[key] = 1` |
+| Searching | Check `arr[key] == 1` |
+| Deletion | `arr[key] = 0` |
+| Fixed array limitation | Cannot safely access an index outside its bounds |
+| Vector | Can dynamically increase its size |
+| `resize()` | Changes the number of elements |
+| `size()` | Number of current elements |
+| `capacity()` | Allocated storage available before another allocation |
+| Minimum size for index $k$ | $k+1$ |
+| Vector memory limitation | Still depends on the largest key |
+| Hashing | Maps keys to table indices using a hash function |
 
 ### What to study next
 

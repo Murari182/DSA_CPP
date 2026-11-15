@@ -40,14 +40,16 @@ The process is:
 
 For example, let:
 
-\[ h(key)=key`\bmod10`{=tex} \]
+$$
+h(key)=key\bmod10
+$$
 
-    Key   Calculation   Index
-  ----- ------------- -------
-     10       10 % 10       0
-     20       20 % 10       0
-     30       30 % 10       0
-     40       40 % 10       0
+| Key | Calculation | Index |
+|---:|---|---:|
+| 10 | $10 \bmod 10$ | 0 |
+| 20 | $20 \bmod 10$ | 0 |
+| 30 | $30 \bmod 10$ | 0 |
+| 40 | $40 \bmod 10$ | 0 |
 
 Different keys can map to the same index. This is called a
 **collision**.
@@ -61,29 +63,35 @@ compiler symbol tables, duplicate detection, and C++ `unordered_map` and
 A hash table is an array-like data structure in which positions are
 calculated by a hash function.
 
-If the table size is (m=10), valid indices are:
+If the table size is $m=10$, valid indices are:
 
-\[ 0,1,2,`\ldots`{=tex},9 \]
+$$
+0,1,2,\ldots,9
+$$
 
-A hash function maps keys from a universe (U) into valid table
+A hash function maps keys from a universe $U$ into valid table
 positions:
 
-\[ h:U`\rightarrow`{=tex}{0,1,`\ldots`{=tex},m-1} \]
+$$
+h:U\rightarrow\{0,1,\ldots,m-1\}
+$$
 
 Therefore:
 
-\[ `\boxed{0\leq h(key)<m}`{=tex} \]
+$$
+\boxed{0\leq h(key)<m}
+$$
 
-  Term             Meaning
-  ---------------- ---------------------------------------
-  Key              Input value to be hashed
-  Hash function    Calculates a table index
-  Hash table       Stores keys or key-value entries
-  Hash index       Position returned by the function
-  Table size (m)   Number of available positions
-  Collision        Different keys produce the same index
-  LSB              Least Significant Bit
-  MSB              Most Significant Bit
+| Term | Meaning |
+|---|---|
+| Key | Input value to be hashed |
+| Hash function | Calculates a table index |
+| Hash table | Stores keys or key-value entries |
+| Hash index | Position returned by the function |
+| Table size ($m$) | Number of available positions |
+| Collision | Different keys produce the same index |
+| LSB | Least Significant Bit |
+| MSB | Most Significant Bit |
 
 # 3. Good Hash Functions
 
@@ -110,57 +118,69 @@ collisions never occur.
 The Division Method divides the key by the table size and uses the
 remainder.
 
-\[ `\boxed{h(key)=key\bmod m}`{=tex} \]
+$$
+\boxed{h(key)=key\bmod m}
+$$
 
 Example:
 
-\[ key=12345,`\quad `{=tex}m=1000 \]
+$$
+key=12345,\quad m=1000
+$$
 
-\[ h(12345)=12345`\bmod1000`{=tex}=`\boxed{345}`{=tex} \]
+$$
+h(12345)=12345\bmod1000=\boxed{345}
+$$
 
 The modulo operation guarantees:
 
-\[ 0`\leq `{=tex}key`\bmod `{=tex}m\<m \]
+$$
+0\leq key\bmod m<m
+$$
 
-For (m=1000), the valid indices are 0 through 999.
+For $m=1000$, the valid indices are 0 through 999.
 
 # 5. Power-of-2 Table Sizes
 
 A table size is a power of 2 when:
 
-\[ `\boxed{m=2^k}`{=tex} \]
+$$
+\boxed{m=2^k}
+$$
 
 Examples:
 
-    Table size    Power   Number of bits (k)
-  ------------ -------- --------------------
-             2   (2\^1)                    1
-             4   (2\^2)                    2
-             8   (2\^3)                    3
-            16   (2\^4)                    4
-            32   (2\^5)                    5
-            64   (2\^6)                    6
+| Table size | Power | Number of bits ($k$) |
+|---:|---:|---:|
+| 2 | $2^1$ | 1 |
+| 4 | $2^2$ | 2 |
+| 8 | $2^3$ | 3 |
+| 16 | $2^4$ | 4 |
+| 32 | $2^5$ | 5 |
+| 64 | $2^6$ | 6 |
 
-For (m=8=2\^3), valid indices are 0 to 7:
+For $m=8=2^3$, valid indices are 0 to 7:
 
-    Decimal   Binary
-  --------- --------
-          0      000
-          1      001
-          2      010
-          3      011
-          4      100
-          5      101
-          6      110
-          7      111
+| Decimal | Binary |
+|---:|---:|
+| 0 | 000 |
+| 1 | 001 |
+| 2 | 010 |
+| 3 | 011 |
+| 4 | 100 |
+| 5 | 101 |
+| 6 | 110 |
+| 7 | 111 |
 
-There are exactly (2\^3=8) possible three-bit combinations.
+There are exactly $2^3=8$ possible three-bit combinations.
 
 In general:
 
-\[ `\boxed{k=\log_2m}`{=tex} \]
+$$
+\boxed{k=\log_2m}
+$$
 
-when (m) is a power of 2.
+when $m$ is a power of 2.
 
 # 6. LSB and MSB
 
@@ -169,40 +189,56 @@ when (m) is a power of 2.
 
 Consider:
 
-\[ 169=(10101001)\_2 \]
+$$
+169=(10101001)_2
+$$
 
 The binary place values, from right to left, are:
 
-\[ 1,2,4,8,16,32,64,128 \]
+$$
+1,2,4,8,16,32,64,128
+$$
 
-For (m=8=2\^3), the last three bits determine the remainder.
+For $m=8=2^3$, the last three bits determine the remainder.
 
-\[ 169=(10101`\underbrace{001}`{=tex}\_{`\text{last 3 bits}`{=tex}})\_2
-\]
+$$
+169=(10101\underbrace{001}_{\text{last 3 bits}})_2
 
-\[ (001)\_2=1 \]
+$$
+
+$$
+(001)_2=1
+$$
 
 Therefore:
 
-\[ `\boxed{169\bmod8=1}`{=tex} \]
+$$
+\boxed{169\bmod8=1}
+$$
 
 ## Why does extracting the last k bits work?
 
-If (m=2\^k), any non-negative integer (N) can be written as:
+If $m=2^k$, any non-negative integer $N$ can be written as:
 
-\[ N=q`\cdot2`{=tex}^k+r,`\qquad 0`{=tex}`\leq `{=tex}r\<2^k \]
+$$
+N=q\cdot2^k+r,\qquad 0\leq r<2^k
+$$
 
-In binary, the last (k) bits represent (r). Thus:
+In binary, the last $k$ bits represent $r$. Thus:
 
-\[ `\boxed{N\bmod2^k=r}`{=tex} \]
+$$
+\boxed{N\bmod2^k=r}
+$$
 
 ## Bitwise AND equivalent
 
 For a positive power-of-2 table size:
 
-\[ `\boxed{h(key)=key\ \&\ (m-1)}`{=tex} \]
+$$
+\boxed{h(key)=key\ \&\ (m-1)}
+$$
 
-Example with (m=8):
+Example with $m=8$:
 
 ``` text
   10101001   (169)
@@ -216,21 +252,23 @@ C++, use suitable unsigned integer types for bitwise hashing.
 
 # 7. Drawback of Power-of-2 Sizes
 
-When (m=2\^k), the Division Method depends only on the last (k) bits.
+When $m=2^k$, the Division Method depends only on the last $k$ bits.
 
-Suppose (m=8=2\^3):
+Suppose $m=8=2^3$:
 
-    Key Binary   Last 3 bits
-  ----- -------- -------------
-      9 1001     001
-     17 10001    001
-     25 11001    001
-     33 100001   001
+| Key | Binary | Last 3 bits |
+|---:|---|---|
+| 9 | 1001 | 001 |
+| 17 | 10001 | 001 |
+| 25 | 11001 | 001 |
+| 33 | 100001 | 001 |
 
 All have the same last three bits:
 
-\[ 9`\bmod8`{=tex}=17`\bmod8`{=tex}=25`\bmod8`{=tex}=33`\bmod8`{=tex}=1
-\]
+$$
+9\bmod8=17\bmod8=25\bmod8=33\bmod8=1
+
+$$
 
 They all map to index 1, causing collisions.
 
@@ -242,7 +280,7 @@ expose repetitive patterns in the lower bits of poorly distributed keys.
 A prime number is an integer greater than 1 with exactly two positive
 factors: 1 and itself.
 
-Examples: (2,3,5,7,11,13,17,19,`\ldots`{=tex})
+Examples: $2,3,5,7,11,13,17,19,\ldots$
 
 A prime table size can reduce certain systematic collisions caused by
 common factors or regular numerical patterns.
@@ -251,35 +289,43 @@ common factors or regular numerical patterns.
 
 Keys:
 
-\[ 10,20,30,40,50,60 \]
+$$
+10,20,30,40,50,60
+$$
 
 ### Table size 10
 
-\[ h(key)=key`\bmod10`{=tex} \]
+$$
+h(key)=key\bmod10
+$$
 
 Every key maps to index 0 because every key is a multiple of 10.
 
 ### Table size 7
 
-\[ h(key)=key`\bmod7`{=tex} \]
+$$
+h(key)=key\bmod7
+$$
 
-    Key   Calculation   Index
-  ----- ------------- -------
-     10        10 % 7       3
-     20        20 % 7       6
-     30        30 % 7       2
-     40        40 % 7       5
-     50        50 % 7       1
-     60        60 % 7       4
+| Key | Calculation | Index |
+|---:|---|---:|
+| 10 | $10 \bmod 7$ | 3 |
+| 20 | $20 \bmod 7$ | 6 |
+| 30 | $30 \bmod 7$ | 2 |
+| 40 | $40 \bmod 7$ | 5 |
+| 50 | $50 \bmod 7$ | 1 |
+| 60 | $60 \bmod 7$ | 4 |
 
 All six keys now map to different positions.
 
-Mathematically, if keys are (K=10n), then with (m=10):
+Mathematically, if keys are $K=10n$, then with $m=10$:
 
-\[ (10n)`\bmod10`{=tex}=0 \]
+$$
+(10n)\bmod10=0
+$$
 
-With (m=7), since (`\gcd`{=tex}(10,7)=1), the remainders cycle through
-the table positions as (n) increases.
+With $m=7$, since $\gcd(10,7)=1$, the remainders cycle through
+the table positions as $n$ increases.
 
 **Important:** Prime table sizes do not eliminate all collisions. They
 can reduce particular regular patterns. Key distribution and
@@ -292,7 +338,9 @@ original key and combines them to form the index.
 
 Example:
 
-\[ m=1000,`\quad `{=tex}key=456378945 \]
+$$
+m=1000,\quad key=456378945
+$$
 
 Select the 3rd, 6th and 9th digits from the left:
 
@@ -304,7 +352,9 @@ Select the 3rd, 6th and 9th digits from the left:
 
 The selected digits are 685:
 
-\[ `\boxed{h(key)=685}`{=tex} \]
+$$
+\boxed{h(key)=685}
+$$
 
 Digit positions should be selected so that they vary across the expected
 keys.
@@ -335,11 +385,15 @@ digits.
 
 Example:
 
-\[ m=1000,`\quad `{=tex}key=12356 \]
+$$
+m=1000,\quad key=12356
+$$
 
 Square the key:
 
-\[ 12356\^2=152670736 \]
+$$
+12356^2=152670736
+$$
 
 Extract the middle three digits:
 
@@ -351,7 +405,9 @@ Extract the middle three digits:
 
 Therefore:
 
-\[ `\boxed{h(12356)=670}`{=tex} \]
+$$
+\boxed{h(12356)=670}
+$$
 
 ## Why square the key?
 
@@ -359,9 +415,13 @@ Squaring mixes information from different parts of the original key.
 
 For example:
 
-\[ 123\^2=15129 \]
+$$
+123^2=15129
+$$
 
-\[ 124\^2=15376 \]
+$$
+124^2=15376
+$$
 
 The middle three digits are 512 and 537 respectively. A small change in
 the key can change the extracted middle portion.
@@ -405,7 +465,9 @@ directly without reversing any group.
 
 Example:
 
-\[ key=123456789,`\quad `{=tex}m=1000 \]
+$$
+key=123456789,\quad m=1000
+$$
 
 Divide into groups of three digits:
 
@@ -415,19 +477,29 @@ Divide into groups of three digits:
 
 Keep the groups unchanged and add:
 
-\[ 123+456+789=1368 \]
+$$
+123+456+789=1368
+$$
 
 Apply modulo:
 
-\[ h(key)=1368`\bmod1000`{=tex} \]
+$$
+h(key)=1368\bmod1000
+$$
 
-\[ `\boxed{h(key)=368}`{=tex} \]
+$$
+\boxed{h(key)=368}
+$$
 
-For groups (G_1,G_2,`\ldots`{=tex},G_n):
+For groups (G_1,G_2,\ldots,G_n):
 
-\[ S=G_1+G_2+`\cdots`{=tex}+G_n \]
+$$
+S=G_1+G_2+\cdots+G_n
+$$
 
-\[ `\boxed{h(key)=S\bmod m}`{=tex} \]
+$$
+\boxed{h(key)=S\bmod m}
+$$
 
 ### Advantages
 
@@ -448,7 +520,9 @@ alternate groups before adding them.
 
 Example:
 
-\[ key=123456789,`\quad `{=tex}m=1000 \]
+$$
+key=123456789,\quad m=1000
+$$
 
 Divide:
 
@@ -464,22 +538,32 @@ Reverse the second group, keeping the first and third unchanged:
 
 Add:
 
-\[ 123+654+789=1566 \]
+$$
+123+654+789=1566
+$$
 
 Apply modulo:
 
-\[ h(key)=1566`\bmod1000`{=tex} \]
+$$
+h(key)=1566\bmod1000
+$$
 
-\[ `\boxed{h(key)=566}`{=tex} \]
+$$
+\boxed{h(key)=566}
+$$
 
-Let (G_i) be the original groups and (R(G_i)) be the reversal of a
+Let $G_i$ be the original groups and $R(G_i)$ be the reversal of a
 group.
 
 For the convention where alternate groups are reversed:
 
-\[ S=G_1+R(G_2)+G_3+R(G_4)+`\cdots`{=tex} \]
+$$
+S=G_1+R(G_2)+G_3+R(G_4)+\cdots
+$$
 
-\[ `\boxed{h(key)=S\bmod m}`{=tex} \]
+$$
+\boxed{h(key)=S\bmod m}
+$$
 
 ### Advantages
 
@@ -501,16 +585,18 @@ your instructor.
 
 Use the same key:
 
-\[ key=123456789,`\quad `{=tex}m=1000 \]
+$$
+key=123456789,\quad m=1000
+$$
 
-  Feature                     Fold-Shifting     Fold-Boundary
-  --------------------------- ----------------- -----------------
-  Groups                      123, 456, 789     123, 456, 789
-  Reverse alternate groups?   No                Yes
-  Groups added                123 + 456 + 789   123 + 654 + 789
-  Sum                         1368              1566
-  Modulo                      1368 % 1000       1566 % 1000
-  Final index                 **368**           **566**
+| Feature | Fold-Shifting | Fold-Boundary |
+|---|---|---|
+| Groups | 123, 456, 789 | 123, 456, 789 |
+| Reverse alternate groups? | No | Yes |
+| Groups added | 123 + 456 + 789 | 123 + 654 + 789 |
+| Sum | 1368 | 1566 |
+| Modulo | 1368 % 1000 | 1566 % 1000 |
+| Final index | **368** | **566** |
 
 Visual flow:
 
@@ -537,20 +623,13 @@ Visual flow:
 
 # 12. Comparison of Hashing Methods
 
-  -----------------------------------------------------------------------
-  Method                  Main operation          Hash generation
-  ----------------------- ----------------------- -----------------------
-  Division                Modulo                  Remainder
-
-  Digit Extraction        Digit selection         Selected digits
-
-  Mid-Square              Squaring                Middle digits
-
-  Fold-Shifting           Grouping and addition   Sum of original groups
-
-  Fold-Boundary           Grouping, reversal and  Sum of alternate
-                          addition                reversed groups
-  -----------------------------------------------------------------------
+| Method | Main operation | Hash generation |
+|---|---|---|
+| Division | Modulo | Remainder |
+| Digit Extraction | Digit selection | Selected digits |
+| Mid-Square | Squaring | Middle digits |
+| Fold-Shifting | Grouping and addition | Sum of original groups |
+| Fold-Boundary | Grouping, reversal, and addition | Sum of alternate reversed groups |
 
 No method guarantees perfect distribution for every dataset.
 
@@ -560,21 +639,31 @@ A collision occurs when two different keys generate the same hash index.
 
 Mathematically:
 
-\[ K_1`\neq `{=tex}K_2 \]
+$$
+K_1\neq K_2
+$$
 
 but:
 
-\[ `\boxed{h(K_1)=h(K_2)}`{=tex} \]
+$$
+\boxed{h(K_1)=h(K_2)}
+$$
 
 Example:
 
-\[ h(key)=key`\bmod10`{=tex} \]
+$$
+h(key)=key\bmod10
+$$
 
 For keys 15 and 25:
 
-\[ 15`\bmod10`{=tex}=5 \]
+$$
+15\bmod10=5
+$$
 
-\[ 25`\bmod10`{=tex}=5 \]
+$$
+25\bmod10=5
+$$
 
 Both map to index 5.
 
@@ -762,45 +851,33 @@ handle partial groups, leading zeros, large sums and overflow.
 
 Let:
 
--   \(n\) be the number of digits in the key.
--   \(g\) be the number of groups in folding.
+-   $n$ be the number of digits in the key.
+-   $g$ be the number of groups in folding.
 
-  -----------------------------------------------------------------------
-  Method                  Approximate time        Auxiliary space
-                          complexity              
-  ----------------------- ----------------------- -----------------------
-  Division                (O(1)) for fixed-width  (O(1))
-                          integers                
-
-  Digit Extraction        (O(n)) for string-based (O(n))
-                          extraction              
-
-  Mid-Square              Depends on integer      Depends on
-                          multiplication          representation
-
-  Fold-Shifting           (O(n))                  (O(1)) with streaming
-                                                  groups
-
-  Fold-Boundary           (O(n))                  (O(1)) with fixed-size
-                                                  group processing
-  -----------------------------------------------------------------------
+| Method | Approximate time complexity | Auxiliary space |
+|---|---|---|
+| Division | $O(1)$ for fixed-width integers | $O(1)$ |
+| Digit Extraction | $O(n)$ for string-based extraction | $O(n)$ |
+| Mid-Square | Depends on integer multiplication | Depends on representation |
+| Fold-Shifting | $O(n)$ | $O(1)$ with streaming groups |
+| Fold-Boundary | $O(n)$ | $O(1)$ with fixed-size group processing |
 
 These complexities describe hash-index calculation, not complete
 hash-table operations.
 
 With good distribution and suitable collision handling, average lookup,
-insertion and deletion can be (O(1)). Worst-case performance can be
-(O(n)).
+insertion and deletion can be $O(1)$. Worst-case performance can be
+$O(n)$.
 
 # 16. Common Mistakes and Important Observations
 
-1.  Table size and maximum index are different. If (m=1000), valid
+1.  Table size and maximum index are different. If $m=1000$, valid
     indices are 0 through 999.
 2.  Modulo returns the remainder, not the quotient.
 3.  LSB is the rightmost bit.
 4.  MSB is the leftmost bit.
-5.  If (m=2\^k), the last (k) bits determine the modulo index.
-6.  Different keys can have the same last (k) bits.
+5.  If $m=2^k$, the last $k$ bits determine the modulo index.
+6.  Different keys can have the same last $k$ bits.
 7.  Prime table sizes can reduce certain patterns but cannot eliminate
     all collisions.
 8.  Digit Extraction depends on the positions selected.
@@ -820,15 +897,15 @@ Try solving these without looking at the notes.
 
 ## A. Division Method
 
-1.  Calculate the hash index for key 4567 when (m=100).
-2.  Calculate the hash index for key 12345 when (m=1000).
+1.  Calculate the hash index for key 4567 when $m=100$.
+2.  Calculate the hash index for key 12345 when $m=1000$.
 3.  What happens when all keys are multiples of the table size?
 
 ## B. Power-of-2 Table Size
 
-4.  If (m=32), how many LSB bits are required?
-5.  Find the hash index of 77 when (m=16).
-6.  Do keys 9, 17, 25 and 33 collide when (m=8)? Explain.
+4.  If $m=32$, how many LSB bits are required?
+5.  Find the hash index of 77 when $m=16$.
+6.  Do keys 9, 17, 25 and 33 collide when $m=8$? Explain.
 
 ## C. Digit Extraction
 
@@ -839,16 +916,16 @@ Try solving these without looking at the notes.
 ## D. Mid-Square
 
 9.  Calculate the square of 123.
-10. Extract the middle three digits from (123\^2).
+10. Extract the middle three digits from $123^2$.
 11. Why can squaring large keys cause implementation problems?
 
 ## E. Folding
 
 12. Apply Fold-Shifting to 987654321 with three-digit groups and
-    (m=1000).
+    $m=1000$.
 13. Apply Fold-Boundary to the same key.
 14. Explain the difference between the two methods.
-15. If the folded sum is 1912 and (m=1000), find the hash index.
+15. If the folded sum is 1912 and $m=1000$, find the hash index.
 
 # 18. Quick Revision
 
@@ -856,46 +933,64 @@ Try solving these without looking at the notes.
 
 **Division Method**
 
-\[ `\boxed{h(key)=key\bmod m}`{=tex} \]
+$$
+\boxed{h(key)=key\bmod m}
+$$
 
 **Power-of-2 Table Size**
 
-\[ `\boxed{m=2^k}`{=tex} \]
+$$
+\boxed{m=2^k}
+$$
 
 **Number of Bits**
 
-\[ `\boxed{k=\log_2m}`{=tex} \]
+$$
+\boxed{k=\log_2m}
+$$
 
 **LSB-Based Hashing**
 
-\[ `\boxed{h(key)=key\bmod2^k}`{=tex} \]
+$$
+\boxed{h(key)=key\bmod2^k}
+$$
 
 **Bitwise AND Equivalent**
 
-\[ `\boxed{h(key)=key\ \&\ (m-1)}`{=tex} \]
+$$
+\boxed{h(key)=key\ \&\ (m-1)}
+$$
 
 **Digit Extraction**
 
-\[ `\boxed{h(key)=\text{Selected Digits}}`{=tex} \]
+$$
+\boxed{h(key)=\text{Selected Digits}}
+$$
 
 **Mid-Square**
 
-\[ `\boxed{h(key)=\text{Middle Digits of }key^2}`{=tex} \]
+$$
+\boxed{h(key)=\text{Middle Digits of }key^2}
+$$
 
 **Fold-Shifting**
 
-\[ `\boxed{h(key)=\left(\sum G_i\right)\bmod m}`{=tex} \]
+$$
+\boxed{h(key)=\left(\sum G_i\right)\bmod m}
+$$
 
 **Fold-Boundary**
 
-\[ `\boxed{
+$$
+\boxed{
 h(key)=
 \left(
 G_1+R(G_2)+G_3+R(G_4)+\cdots
 \right)\bmod m
-}`{=tex} \]
+}
+$$
 
-Here, (R(G_i)) represents reversal of a group.
+Here, $R(G_i)$ represents reversal of a group.
 
 ## Final Conceptual Summary
 

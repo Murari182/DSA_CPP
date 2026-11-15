@@ -6,17 +6,21 @@ Hashing is a technique used to store keys in a hash table so that they can be in
 
 A **hash function** converts a key into an array index.
 
-For example, if the table size is \(M=7\), a simple hash function is:
+For example, if the table size is $M=7$, a simple hash function is:
 
-\[
+$$
+
 h(k)=k\bmod 7
-\]
 
-For key \(23\):
+$$
 
-\[
+For key $23$:
+
+$$
+
 h(23)=23\bmod 7=2
-\]
+
+$$
 
 So key 23 is assigned to index 2.
 
@@ -26,12 +30,16 @@ A collision occurs when two different keys produce the same hash-table index.
 
 For example:
 
-\[
+$$
+
 h(23)=23\bmod7=2
-\]
-\[
+
+$$
+$$
+
 h(30)=30\bmod7=2
-\]
+
+$$
 
 Both keys want index 2. A collision-resolution technique is needed to store both keys.
 
@@ -51,16 +59,18 @@ Common collision-resolution techniques include:
 
 In the basic two-table version:
 
-- There are two hash tables, usually called \(T_1\) and \(T_2\).
-- Each table has the same size \(M\).
-- Hash function \(h_1\) gives the only permitted position for a key in \(T_1\).
-- Hash function \(h_2\) gives the only permitted position for that key in \(T_2\).
+- There are two hash tables, usually called $T_1$ and $T_2$.
+- Each table has the same size $M$.
+- Hash function $h_1$ gives the only permitted position for a key in $T_1$.
+- Hash function $h_2$ gives the only permitted position for that key in $T_2$.
 
-Therefore, a key \(k\) can be stored only at:
+Therefore, a key $k$ can be stored only at:
 
-\[
+$$
+
 T_1[h_1(k)] \quad \text{or} \quad T_2[h_2(k)]
-\]
+
+$$
 
 A key is not allowed to occupy an arbitrary empty position.
 
@@ -95,42 +105,54 @@ Both are open-addressing techniques, but their collision-handling methods are di
 
 For the example in this guide, the table size is:
 
-\[
+$$
+
 M=7
-\]
+
+$$
 
 The hash functions are:
 
-\[
-h_1(k)=k\bmod M
-\]
+$$
 
-\[
+h_1(k)=k\bmod M
+
+$$
+
+$$
+
 h_2(k)=[(k\bmod M)+3]\bmod M
-\]
+
+$$
 
 Interpretation:
 
-- Calculate \(h_1(k)\) to find the candidate position in \(T_1\).
-- Calculate \(h_2(k)\) to find the candidate position in \(T_2\).
+- Calculate $h_1(k)$ to find the candidate position in $T_1$.
+- Calculate $h_2(k)$ to find the candidate position in $T_2$.
 
-For key \(23\):
+For key $23$:
 
-\[
+$$
+
 h_1(23)=23\bmod7=2
-\]
 
-\[
+$$
+
+$$
+
 h_2(23)=[(23\bmod7)+3]\bmod7
-\]
-\[
+
+$$
+$$
+
 =(2+3)\bmod7=5
-\]
+
+$$
 
 So key 23 can be stored at either:
 
-- \(T_1[2]\), or
-- \(T_2[5]\).
+- $T_1[2]$, or
+- $T_2[5]$.
 
 It cannot be stored at any other position.
 
@@ -140,11 +162,11 @@ It cannot be stored at any other position.
 
 The following is the alternating insertion convention used in the worked example and C++ program.
 
-1. Start by trying to insert the new key into \(T_1\) at \(h_1(k)\).
+1. Start by trying to insert the new key into $T_1$ at $h_1(k)$.
 2. If that position is empty, place the key there and finish.
 3. If it is occupied, swap the new key with the key already there. The displaced key becomes the key that still needs to be inserted.
-4. Try that displaced key in \(T_2\), at its \(h_2\) position.
-5. If the position is occupied, swap again. The newly displaced key is sent back to \(T_1\).
+4. Try that displaced key in $T_2$, at its $h_2$ position.
+5. If the position is occupied, swap again. The newly displaced key is sent back to $T_1$.
 6. Continue alternating between the tables until an empty candidate position is found.
 7. In a real implementation, limit the number of displacements. If the limit is exceeded, rebuild the table using new hash functions and/or a larger table.
 
@@ -186,27 +208,33 @@ The `swap` is the central operation. After the swap, `currentKey` contains the k
 
 **Question**
 
-Two hash tables of equal size have \(M=7\). Their hash functions are:
+Two hash tables of equal size have $M=7$. Their hash functions are:
 
-\[
+$$
+
 h_1(k)=k\bmod M
-\]
 
-\[
+$$
+
+$$
+
 h_2(k)=[(k\bmod M)+3]\bmod M
-\]
+
+$$
 
 Insert the following sequence using Cuckoo Hashing:
 
-\[
+$$
+
 23,\ 74,\ 73,\ 76,\ 28,\ 25,\ 35,\ 17
-\]
+
+$$
 
 Find the final contents of both hash tables.
 
 ### Step 1 — Calculate both candidate positions
 
-| Key | \(h_1(k)=k\bmod7\) | \(h_2(k)=[(k\bmod7)+3]\bmod7\) |
+| Key | $h_1(k)=k\bmod7$ | $h_2(k)=[(k\bmod7)+3]\bmod7$ |
 |---:|---:|---:|
 | 23 | 2 | 5 |
 | 74 | 4 | 0 |
@@ -225,106 +253,134 @@ Initially, every slot in both tables is empty.
 
 #### Insert 23
 
-\[
-h_1(23)=2
-\]
+$$
 
-\(T_1[2]\) is empty, so place 23 there.
+h_1(23)=2
+
+$$
+
+$T_1[2]$ is empty, so place 23 there.
 
 #### Insert 74
 
-\[
-h_1(74)=4
-\]
+$$
 
-\(T_1[4]\) is empty, so place 74 there.
+h_1(74)=4
+
+$$
+
+$T_1[4]$ is empty, so place 74 there.
 
 #### Insert 73
 
-\[
-h_1(73)=3
-\]
+$$
 
-\(T_1[3]\) is empty, so place 73 there.
+h_1(73)=3
+
+$$
+
+$T_1[3]$ is empty, so place 73 there.
 
 #### Insert 76
 
-\[
-h_1(76)=6
-\]
+$$
 
-\(T_1[6]\) is empty, so place 76 there.
+h_1(76)=6
+
+$$
+
+$T_1[6]$ is empty, so place 76 there.
 
 #### Insert 28
 
-\[
-h_1(28)=0
-\]
+$$
 
-\(T_1[0]\) is empty, so place 28 there.
+h_1(28)=0
+
+$$
+
+$T_1[0]$ is empty, so place 28 there.
 
 #### Insert 25 — First displacement
 
-\[
+$$
+
 h_1(25)=4
-\]
 
-But \(T_1[4]\) already contains 74.
+$$
 
-- Put 25 into \(T_1[4]\).
+But $T_1[4]$ already contains 74.
+
+- Put 25 into $T_1[4]$.
 - The displaced key is 74.
-- Move 74 to its alternative position in \(T_2\).
+- Move 74 to its alternative position in $T_2$.
 
-\[
+$$
+
 h_2(74)=[(74\bmod7)+3]\bmod7
-\]
-\[
-=(4+3)\bmod7=0
-\]
 
-\(T_2[0]\) is empty, so place 74 there.
+$$
+$$
+
+=(4+3)\bmod7=0
+
+$$
+
+$T_2[0]$ is empty, so place 74 there.
 
 #### Insert 35 — Second displacement
 
-\[
+$$
+
 h_1(35)=0
-\]
 
-But \(T_1[0]\) contains 28.
+$$
 
-- Put 35 into \(T_1[0]\).
+But $T_1[0]$ contains 28.
+
+- Put 35 into $T_1[0]$.
 - The displaced key is 28.
-- Move 28 to its alternative position in \(T_2\).
+- Move 28 to its alternative position in $T_2$.
 
-\[
+$$
+
 h_2(28)=[(28\bmod7)+3]\bmod7
-\]
-\[
-=(0+3)\bmod7=3
-\]
 
-\(T_2[3]\) is empty, so place 28 there.
+$$
+$$
+
+=(0+3)\bmod7=3
+
+$$
+
+$T_2[3]$ is empty, so place 28 there.
 
 #### Insert 17 — Third displacement
 
-\[
+$$
+
 h_1(17)=3
-\]
 
-But \(T_1[3]\) contains 73.
+$$
 
-- Put 17 into \(T_1[3]\).
+But $T_1[3]$ contains 73.
+
+- Put 17 into $T_1[3]$.
 - The displaced key is 73.
-- Move 73 to its alternative position in \(T_2\).
+- Move 73 to its alternative position in $T_2$.
 
-\[
+$$
+
 h_2(73)=[(73\bmod7)+3]\bmod7
-\]
-\[
-=(3+3)\bmod7=6
-\]
 
-\(T_2[6]\) is empty, so place 73 there.
+$$
+$$
+
+=(3+3)\bmod7=6
+
+$$
+
+$T_2[6]$ is empty, so place 73 there.
 
 No cycle occurs in this sequence. All eight keys are inserted successfully.
 
@@ -344,13 +400,17 @@ No cycle occurs in this sequence. All eight keys are inserted successfully.
 
 Therefore:
 
-\[
-\boxed{T_1=[35,-,23,17,25,-,76]}
-\]
+$$
 
-\[
+\boxed{T_1=[35,-,23,17,25,-,76]}
+
+$$
+
+$$
+
 \boxed{T_2=[74,-,-,28,-,-,73]}
-\]
+
+$$
 
 Here, `-` represents an empty slot.
 
@@ -360,22 +420,24 @@ Here, `-` represents an empty slot.
 
 Searching is simple because a key has only two possible positions in the two-table version.
 
-To search for key \(k\):
+To search for key $k$:
 
-1. Calculate \(h_1(k)\) and check \(T_1[h_1(k)]\).
-2. If the key is not there, calculate/check \(T_2[h_2(k)]\).
+1. Calculate $h_1(k)$ and check $T_1[h_1(k)]$.
+2. If the key is not there, calculate/check $T_2[h_2(k)]$.
 3. If neither location contains the key, the key is absent.
 
 Example: Search for 28.
 
-\[
+$$
+
 h_1(28)=0,\qquad h_2(28)=3
-\]
+
+$$
 
 Check:
 
-- \(T_1[0]=35\), so 28 is not there.
-- \(T_2[3]=28\), so the key is found.
+- $T_1[0]=35$, so 28 is not there.
+- $T_2[3]=28$, so the key is found.
 
 With two tables and two hash functions, lookup checks at most **two slots**.
 
@@ -385,15 +447,15 @@ With two tables and two hash functions, lookup checks at most **two slots**.
 
 Deletion is also straightforward.
 
-To delete key \(k\):
+To delete key $k$:
 
-1. Check \(T_1[h_1(k)]\).
-2. If it contains \(k\), mark that slot empty.
-3. Otherwise, check \(T_2[h_2(k)]\).
-4. If it contains \(k\), mark that slot empty.
+1. Check $T_1[h_1(k)]$.
+2. If it contains $k$, mark that slot empty.
+3. Otherwise, check $T_2[h_2(k)]$.
+4. If it contains $k$, mark that slot empty.
 5. If neither contains it, the key is not present.
 
-For a fixed number of hash functions, deletion takes \(O(1)\) time.
+For a fixed number of hash functions, deletion takes $O(1)$ time.
 
 ---
 
@@ -401,47 +463,53 @@ For a fixed number of hash functions, deletion takes \(O(1)\) time.
 
 Let:
 
-- \(n\) = number of stored keys.
-- \(M\) = number of slots in each table.
-- \(d\) = number of hash functions / candidate positions per key.
+- $n$ = number of stored keys.
+- $M$ = number of slots in each table.
+- $d$ = number of hash functions / candidate positions per key.
 
-For the basic version here, \(d=2\), and there are two tables of \(M\) slots each.
+For the basic version here, $d=2$, and there are two tables of $M$ slots each.
 
 | Operation / property | Complexity | Explanation |
 |---|---|---|
-| Calculate a hash position | \(O(1)\) | A fixed hash function is evaluated |
-| Search / lookup | \(O(1)\) | At most two candidate slots are checked |
-| Delete | \(O(1)\) | At most two candidate slots are checked |
-| Insert | Expected \(O(1)\) under suitable hashing and load assumptions | Usually a short displacement chain |
-| Insert, worst case | \(O(n)\) or more including rebuilding | A long chain or cycle can trigger rehashing |
-| Space | \(O(M)\) | Two arrays of \(M\) slots each; total capacity is \(2M\) |
+| Calculate a hash position | $O(1)$ | A fixed hash function is evaluated |
+| Search / lookup | $O(1)$ | At most two candidate slots are checked |
+| Delete | $O(1)$ | At most two candidate slots are checked |
+| Insert | Expected $O(1)$ under suitable hashing and load assumptions | Usually a short displacement chain |
+| Insert, worst case | $O(n)$ or more including rebuilding | A long chain or cycle can trigger rehashing |
+| Space | $O(M)$ | Two arrays of $M$ slots each; total capacity is $2M$ |
 
 ### Important complexity clarification
 
-- Lookup is worst-case \(O(1)\) for a fixed number of hash functions, assuming the hash functions and candidate positions are directly computable.
-- Insertion is **not guaranteed worst-case \(O(1)\)**. A displacement chain may be long, and rehashing can take \(O(n)\) time.
-- The commonly quoted expected \(O(1)\) insertion bound relies on suitable hash functions and keeping the table load below an appropriate threshold. It is not guaranteed for every hash-function choice or every input.
-- If the two tables each have \(M\) slots, the total allocated table space is \(2M\), which is \(O(M)\).
+- Lookup is worst-case $O(1)$ for a fixed number of hash functions, assuming the hash functions and candidate positions are directly computable.
+- Insertion is **not guaranteed worst-case $O(1)$**. A displacement chain may be long, and rehashing can take $O(n)$ time.
+- The commonly quoted expected $O(1)$ insertion bound relies on suitable hash functions and keeping the table load below an appropriate threshold. It is not guaranteed for every hash-function choice or every input.
+- If the two tables each have $M$ slots, the total allocated table space is $2M$, which is $O(M)$.
 
 ### Load factor
 
-For two tables of size \(M\), the total number of available slots is \(2M\).
+For two tables of size $M$, the total number of available slots is $2M$.
 
-\[
+$$
+
 \alpha=\frac{n}{2M}
-\]
+
+$$
 
 For this question:
 
-\[
+$$
+
 n=8,\qquad M=7
-\]
 
-\[
+$$
+
+$$
+
 \alpha=\frac{8}{2\times7}=\frac{8}{14}\approx0.5714
-\]
 
-So the combined load factor is approximately \(57.14\%\).
+$$
+
+So the combined load factor is approximately $57.14\%$.
 
 ---
 
@@ -467,14 +535,14 @@ So the combined load factor is approximately \(57.14\%\).
 
 - Cuckoo Hashing is an **open-addressing** collision-resolution method.
 - The basic version uses two hash tables and two hash functions.
-- Each key has two permitted positions: \(T_1[h_1(k)]\) and \(T_2[h_2(k)]\).
+- Each key has two permitted positions: $T_1[h_1(k)]$ and $T_2[h_2(k)]$.
 - If the chosen position is occupied, the existing key is displaced to its alternative position.
 - The displacement process is also called **eviction** or **kicking out**.
 - A repeated displacement cycle may require rehashing.
 - Search checks at most two positions in the basic two-hash-function version.
-- Lookup and deletion are worst-case \(O(1)\) for a fixed number of candidate positions.
-- Insertion is expected \(O(1)\) under suitable assumptions, but can take longer and may require rehashing.
-- Two tables of size \(M\) provide \(2M\) total slots.
+- Lookup and deletion are worst-case $O(1)$ for a fixed number of candidate positions.
+- Insertion is expected $O(1)$ under suitable assumptions, but can take longer and may require rehashing.
+- Two tables of size $M$ provide $2M$ total slots.
 
 ### Quick memory trick
 
