@@ -1072,7 +1072,7 @@ The adjacency matrix is often useful for dense graphs or frequent edge‑existen
 # 15. Common Exam Traps
 
 1. **Adjacent is not the same as reachable.** Adjacent vertices share a direct edge. Reachable vertices have a path between them.
-2. **Undirected edge storage:** An ordinary edge $(u‑v)$ is stored in both adjacency lists.
+2. **Undirected edge storage:** An ordinary edge $(u-v)$ is stored in both adjacency lists.
 3. **Directed edge storage:** An edge $(u\to v)$ is stored in the outgoing list of $u$, not automatically in $v$'s list.
 4. **Degree and adjacency entries:** In an undirected adjacency list, each ordinary edge contributes two entries.
 5. **Self‑loop:** It contributes $2$ to undirected degree under the standard convention.

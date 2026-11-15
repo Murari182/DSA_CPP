@@ -1,0 +1,19 @@
+{
+  "name": "dsa-cpp-markdown-to-pdf",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Render this repository's Markdown notes as PDFs",
+  "scripts": {
+    "convert": "node convert-md-to-pdf.cjs"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "katex": "^0.19.1",
+    "markdown-it": "^14.1.0",
+    "markdown-it-anchor": "^9.2.0",
+    "markdown-it-texmath": "^1.0.0",
+    "mermaid": "^12.1.0"
+  }
+}
