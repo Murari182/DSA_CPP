@@ -1,0 +1,135 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 520" width="100%" height="100%">
+  <defs>
+    <style>
+      .title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-weight: bold; font-size: 20px; fill: #0f172a; }
+      .subtitle { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 13px; fill: #475569; }
+      .section-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-weight: 600; font-size: 15px; fill: #1e293b; }
+      .cell-text { font-family: "JetBrains Mono", "SF Mono", Consolas, monospace; font-weight: bold; font-size: 15px; fill: #0f172a; text-anchor: middle; dominant-baseline: central; }
+      .cell-text-w { font-family: "JetBrains Mono", "SF Mono", Consolas, monospace; font-weight: bold; font-size: 15px; fill: #ffffff; text-anchor: middle; dominant-baseline: central; }
+      .pivot-text { font-family: "JetBrains Mono", "SF Mono", Consolas, monospace; font-weight: bold; font-size: 15px; fill: #ffffff; text-anchor: middle; dominant-baseline: central; }
+      .pass-hdr { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-weight: 600; font-size: 13px; fill: #1e3a8a; }
+      .desc-text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 12px; fill: #334155; }
+      .code-font { font-family: "JetBrains Mono", "SF Mono", Consolas, monospace; font-size: 11px; fill: #1e3a8a; }
+      .ptr-lbl { font-family: "JetBrains Mono", "SF Mono", Consolas, monospace; font-weight: bold; font-size: 12px; fill: #ea580c; text-anchor: middle; }
+    </style>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect width="960" height="520" fill="#f8fafc" rx="12"/>
+  <rect x="12" y="12" width="936" height="496" fill="#ffffff" rx="10" stroke="#e2e8f0" stroke-width="1.5"/>
+
+  <!-- Title & Subtitle -->
+  <text x="36" y="42" class="title">Quick Sort: Lomuto Partitioning Scheme &amp; Pivot Mechanics</text>
+  <text x="36" y="62" class="subtitle">In-place array rearrangement, pivot placement guarantees, and O(n log n) average vs O(n²) worst case</text>
+
+  <!-- LEFT PANEL: Partitioning Steps -->
+  <g transform="translate(36, 85)">
+    <rect width="470" height="405" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+    <text x="20" y="28" class="section-title">Lomuto Partition on [5, 2, 8, 1, 4] (Pivot = 4)</text>
+
+    <!-- Step 1: Initial Pointers -->
+    <g transform="translate(20, 50)">
+      <text x="0" y="14" class="code-font">1. Initial: Pivot = 4 @ arr[4]. Pointer i = -1, j = 0</text>
+      <!-- Cells -->
+      <rect x="0" y="22" width="45" height="34" rx="4" fill="#ffffff" stroke="#cbd5e1"/>
+      <text x="22" y="39" class="cell-text">5</text>
+      <rect x="50" y="22" width="45" height="34" rx="4" fill="#ffffff" stroke="#cbd5e1"/>
+      <text x="72" y="39" class="cell-text">2</text>
+      <rect x="100" y="22" width="45" height="34" rx="4" fill="#ffffff" stroke="#cbd5e1"/>
+      <text x="122" y="39" class="cell-text">8</text>
+      <rect x="150" y="22" width="45" height="34" rx="4" fill="#ffffff" stroke="#cbd5e1"/>
+      <text x="172" y="39" class="cell-text">1</text>
+      <!-- Pivot Cell -->
+      <rect x="200" y="22" width="45" height="34" rx="4" fill="#7c3aed" stroke="#6d28d9"/>
+      <text x="222" y="39" class="pivot-text">4</text>
+      <text x="255" y="39" class="desc-text" fill="#7c3aed">← Pivot</text>
+    </g>
+
+    <!-- Step 2: j scans 5 (5 > 4, do nothing). j scans 2 (2 <= 4 -> i++, swap arr[i], arr[j]) -->
+    <g transform="translate(20, 125)">
+      <text x="0" y="14" class="code-font">2. Scan j=1 (val 2 &lt;= 4): i advances to 0 → SWAP(arr[0], arr[1])</text>
+      <rect x="0" y="22" width="45" height="34" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+      <text x="22" y="39" class="cell-text">2</text>
+      <rect x="50" y="22" width="45" height="34" rx="4" fill="#fee2e2" stroke="#dc2626"/>
+      <text x="72" y="39" class="cell-text">5</text>
+      <rect x="100" y="22" width="45" height="34" rx="4" fill="#ffffff" stroke="#cbd5e1"/>
+      <text x="122" y="39" class="cell-text">8</text>
+      <rect x="150" y="22" width="45" height="34" rx="4" fill="#ffffff" stroke="#cbd5e1"/>
+      <text x="172" y="39" class="cell-text">1</text>
+      <rect x="200" y="22" width="45" height="34" rx="4" fill="#7c3aed"/>
+      <text x="222" y="39" class="pivot-text">4</text>
+      <text x="255" y="39" class="desc-text">i = 0 (val 2 &lt;= 4)</text>
+    </g>
+
+    <!-- Step 3: j scans 8 (8 > 4). j scans 1 (1 <= 4 -> i++, swap arr[i], arr[j]) -->
+    <g transform="translate(20, 200)">
+      <text x="0" y="14" class="code-font">3. Scan j=3 (val 1 &lt;= 4): i advances to 1 → SWAP(arr[1], arr[3])</text>
+      <rect x="0" y="22" width="45" height="34" rx="4" fill="#dcfce7" stroke="#16a34a"/>
+      <text x="22" y="39" class="cell-text">2</text>
+      <rect x="50" y="22" width="45" height="34" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+      <text x="72" y="39" class="cell-text">1</text>
+      <rect x="100" y="22" width="45" height="34" rx="4" fill="#fee2e2" stroke="#dc2626"/>
+      <text x="122" y="39" class="cell-text">8</text>
+      <rect x="150" y="22" width="45" height="34" rx="4" fill="#fee2e2" stroke="#dc2626"/>
+      <text x="172" y="39" class="cell-text">5</text>
+      <rect x="200" y="22" width="45" height="34" rx="4" fill="#7c3aed"/>
+      <text x="222" y="39" class="pivot-text">4</text>
+      <text x="255" y="39" class="desc-text">i = 1 (region &lt;= 4)</text>
+    </g>
+
+    <!-- Step 4: Final Swap Pivot into arr[i+1] -->
+    <g transform="translate(20, 275)">
+      <text x="0" y="14" class="code-font">4. Final Step: SWAP(arr[i + 1], arr[high]) → Pivot Lands at [2]!</text>
+      <!-- Region <= pivot -->
+      <rect x="0" y="22" width="45" height="34" rx="4" fill="#dcfce7" stroke="#16a34a"/>
+      <text x="22" y="39" class="cell-text">2</text>
+      <rect x="50" y="22" width="45" height="34" rx="4" fill="#dcfce7" stroke="#16a34a"/>
+      <text x="72" y="39" class="cell-text">1</text>
+      <!-- PIVOT AT EXACT FINAL POSITION -->
+      <rect x="100" y="22" width="45" height="34" rx="4" fill="#16a34a" stroke="#15803d" stroke-width="2"/>
+      <text x="122" y="39" class="cell-text-w">4</text>
+      <!-- Region > pivot -->
+      <rect x="150" y="22" width="45" height="34" rx="4" fill="#fee2e2" stroke="#dc2626"/>
+      <text x="172" y="39" class="cell-text">5</text>
+      <rect x="200" y="22" width="45" height="34" rx="4" fill="#fee2e2" stroke="#dc2626"/>
+      <text x="222" y="39" class="cell-text">8</text>
+      <text x="255" y="39" class="desc-text" fill="#15803d" font-weight="600">Pivot in place!</text>
+    </g>
+
+    <g transform="translate(20, 350)">
+      <rect width="430" height="40" rx="4" fill="#eff6ff" stroke="#bfdbfe"/>
+      <text x="14" y="25" class="desc-text">Invariant: Elements left of 4 are ≤ 4; elements right of 4 are &gt; 4.</text>
+    </g>
+  </g>
+
+  <!-- RIGHT PANEL: Performance Profile & Pitfalls -->
+  <g transform="translate(530, 85)">
+    <rect width="394" height="405" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+    <text x="24" y="28" class="section-title">Complexity &amp; Pivot Selection</text>
+
+    <!-- Complexity Box -->
+    <g transform="translate(24, 45)">
+      <rect width="346" height="150" rx="6" fill="#f0fdf4" stroke="#bbf7d0"/>
+      <text x="14" y="22" class="pass-hdr" fill="#166534">Complexity Analysis:</text>
+      <text x="14" y="44" class="desc-text">• <tspan font-weight="600">Best Case:</tspan> O(n log n) (Balanced 50/50 splits).</text>
+      <text x="14" y="62" class="desc-text">• <tspan font-weight="600">Average Case:</tspan> O(n log n) (Mathematically ~ 1.39 n log n).</text>
+      <text x="14" y="80" class="desc-text">• <tspan font-weight="600" fill="#dc2626">Worst Case:</tspan> O(n²) (Already sorted array when</text>
+      <text x="14" y="96" class="desc-text">  choosing first or last element as pivot!).</text>
+      <text x="14" y="116" class="desc-text">• <tspan font-weight="600">Space Complexity:</tspan> O(log n) call stack (in-place data).</text>
+      <text x="14" y="134" class="desc-text">• <tspan font-weight="600">Stability:</tspan> <tspan font-weight="600" fill="#dc2626">UNSTABLE</tspan> (swaps non-adjacent keys).</text>
+    </g>
+
+    <!-- Interview Trap Box -->
+    <g transform="translate(24, 210)">
+      <rect width="346" height="180" rx="6" fill="#fff7ed" stroke="#fed7aa"/>
+      <text x="14" y="22" class="pass-hdr" fill="#9a3412">Mitigating the O(n²) Worst-Case Trap:</text>
+      <text x="14" y="44" class="desc-text">1. <tspan font-weight="600">Randomized Pivot:</tspan> Pick random index between</text>
+      <text x="14" y="60" class="desc-text">   low and high, swap with high before partitioning.</text>
+      <text x="14" y="78" class="desc-text">2. <tspan font-weight="600">Median-of-Three:</tspan> Take median of arr[low],</text>
+      <text x="14" y="94" class="desc-text">   arr[mid], and arr[high].</text>
+      <text x="14" y="114" class="desc-text">3. <tspan font-weight="600">Introsort (std::sort):</tspan> Starts with Quick Sort; if</text>
+      <text x="14" y="130" class="desc-text">   recursion depth exceeds \( 2 \log n \), switches to</text>
+      <text x="14" y="146" class="desc-text">   <tspan font-weight="600">Heap Sort</tspan> to guarantee O(n log n) worst case!</text>
+    </g>
+  </g>
+</svg>

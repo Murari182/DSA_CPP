@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 520" width="100%" height="100%">
+  <defs>
+    <style>
+      .title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-weight: bold; font-size: 20px; fill: #0f172a; }
+      .subtitle { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 13px; fill: #475569; }
+      .section-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-weight: 600; font-size: 15px; fill: #1e293b; }
+      .cell-text { font-family: "JetBrains Mono", "SF Mono", Consolas, monospace; font-weight: bold; font-size: 16px; fill: #1e3a8a; text-anchor: middle; dominant-baseline: central; }
+      .ptr-text { font-family: "JetBrains Mono", "SF Mono", Consolas, monospace; font-size: 11px; fill: #6d28d9; text-anchor: middle; dominant-baseline: central; }
+      .desc-text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 12px; fill: #334155; }
+      .code-font { font-family: "JetBrains Mono", "SF Mono", Consolas, monospace; font-size: 12px; fill: #1e3a8a; }
+    </style>
+    <marker id="fwd-ptr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#2563eb"/>
+    </marker>
+    <marker id="bwd-ptr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#7c3aed"/>
+    </marker>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect width="960" height="520" fill="#f8fafc" rx="12"/>
+  <rect x="12" y="12" width="936" height="496" fill="#ffffff" rx="10" stroke="#e2e8f0" stroke-width="1.5"/>
+
+  <!-- Title & Subtitle -->
+  <text x="36" y="42" class="title">Doubly Linked List: Bidirectional Navigation &amp; O(1) Deletion</text>
+  <text x="36" y="62" class="subtitle">Two-way pointer linking, node structure, and instantaneous deletion with pointer reference</text>
+
+  <!-- TOP PANEL: Node Anatomy (24 bytes) -->
+  <g transform="translate(36, 85)">
+    <rect width="888" height="110" rx="8" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1"/>
+    <text x="20" y="24" class="section-title">Anatomy of a Doubly Linked List Node (sizeof = 24 bytes on 64-bit OS)</text>
+
+    <g transform="translate(40, 40)">
+      <!-- Prev Pointer -->
+      <rect x="0" y="0" width="100" height="45" rx="4" fill="#ede9fe" stroke="#8b5cf6" stroke-width="1.5"/>
+      <text x="50" y="22" class="ptr-text">Node* prev</text>
+      <text x="50" y="38" class="desc-text" text-anchor="middle" font-size="10">8-byte pointer</text>
+
+      <!-- Data Field -->
+      <rect x="100" y="0" width="100" height="45" rx="4" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5"/>
+      <text x="150" y="22" class="cell-text">int data</text>
+      <text x="150" y="38" class="desc-text" text-anchor="middle" font-size="10">4 bytes (+4B pad)</text>
+
+      <!-- Next Pointer -->
+      <rect x="200" y="0" width="100" height="45" rx="4" fill="#ede9fe" stroke="#8b5cf6" stroke-width="1.5"/>
+      <text x="250" y="22" class="ptr-text">Node* next</text>
+      <text x="250" y="38" class="desc-text" text-anchor="middle" font-size="10">8-byte pointer</text>
+    </g>
+
+    <g transform="translate(390, 42)">
+      <text x="0" y="15" class="code-font">struct Node {</text>
+      <text x="20" y="32" class="code-font">Node* prev; int data; Node* next;</text>
+      <text x="0" y="49" class="code-font">};</text>
+    </g>
+
+    <g transform="translate(680, 45)">
+      <text x="0" y="15" class="desc-text">• <tspan font-weight="600" fill="#15803d">Forward &amp; backward traversal</tspan>.</text>
+      <text x="0" y="32" class="desc-text">• Foundation for <tspan class="code-font">std::list</tspan> and <tspan class="code-font">LRU Cache</tspan>.</text>
+      <text x="0" y="49" class="desc-text">• O(1) removal given node pointer.</text>
+    </g>
+  </g>
+
+  <!-- BOTTOM PANEL: Doubly Linked Chain in Memory -->
+  <g transform="translate(36, 210)">
+    <rect width="888" height="280" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+    <text x="24" y="28" class="section-title">Bidirectional Chain: NULL &lt;-- [10] &lt;==&gt; [20] &lt;==&gt; [30] --&gt; NULL</text>
+
+    <!-- Node 1 (10) -->
+    <g transform="translate(80, 80)">
+      <rect x="0" y="0" width="50" height="50" rx="4" fill="#ede9fe" stroke="#8b5cf6"/>
+      <text x="25" y="25" class="ptr-text">null</text>
+      <rect x="50" y="0" width="60" height="50" rx="4" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+      <text x="80" y="25" class="cell-text">10</text>
+      <rect x="110" y="0" width="50" height="50" rx="4" fill="#ede9fe" stroke="#8b5cf6"/>
+      <text x="135" y="25" class="ptr-text">next</text>
+    </g>
+
+    <!-- Bi-directional arrows between Node 1 and Node 2 -->
+    <path d="M 240 92 L 340 92" fill="none" stroke="#2563eb" stroke-width="2.5" marker-end="url(#fwd-ptr)"/>
+    <path d="M 340 118 L 240 118" fill="none" stroke="#7c3aed" stroke-width="2.5" marker-end="url(#bwd-ptr)"/>
+
+    <!-- Node 2 (20) -->
+    <g transform="translate(350, 80)">
+      <rect x="0" y="0" width="50" height="50" rx="4" fill="#ede9fe" stroke="#8b5cf6"/>
+      <text x="25" y="25" class="ptr-text">prev</text>
+      <rect x="50" y="0" width="60" height="50" rx="4" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+      <text x="80" y="25" class="cell-text">20</text>
+      <rect x="110" y="0" width="50" height="50" rx="4" fill="#ede9fe" stroke="#8b5cf6"/>
+      <text x="135" y="25" class="ptr-text">next</text>
+    </g>
+
+    <!-- Bi-directional arrows between Node 2 and Node 3 -->
+    <path d="M 510 92 L 610 92" fill="none" stroke="#2563eb" stroke-width="2.5" marker-end="url(#fwd-ptr)"/>
+    <path d="M 610 118 L 510 118" fill="none" stroke="#7c3aed" stroke-width="2.5" marker-end="url(#bwd-ptr)"/>
+
+    <!-- Node 3 (30) -->
+    <g transform="translate(620, 80)">
+      <rect x="0" y="0" width="50" height="50" rx="4" fill="#ede9fe" stroke="#8b5cf6"/>
+      <text x="25" y="25" class="ptr-text">prev</text>
+      <rect x="50" y="0" width="60" height="50" rx="4" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+      <text x="80" y="25" class="cell-text">30</text>
+      <rect x="110" y="0" width="50" height="50" rx="4" fill="#ede9fe" stroke="#8b5cf6"/>
+      <text x="135" y="25" class="ptr-text">null</text>
+    </g>
+
+    <!-- O(1) Deletion Mechanism Callout -->
+    <g transform="translate(40, 175)">
+      <rect width="808" height="85" rx="6" fill="#f8fafc" stroke="#cbd5e1"/>
+      <text x="16" y="22" class="section-title" font-size="13">The Superpower: O(1) Deletion without Traversal</text>
+      <text x="16" y="44" class="code-font" fill="#15803d">void deleteNode(Node* target) {</text>
+      <text x="36" y="62" class="code-font">target-&gt;prev-&gt;next = target-&gt;next;  target-&gt;next-&gt;prev = target-&gt;prev;  delete target;</text>
+      <text x="16" y="78" class="code-font" fill="#15803d">} // In a singly linked list, deletion requires O(n) search to find the preceding node!</text>
+    </g>
+  </g>
+</svg>

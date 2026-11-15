@@ -1,0 +1,121 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 520" width="100%" height="100%">
+  <defs>
+    <style>
+      .title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-weight: bold; font-size: 20px; fill: #0f172a; }
+      .subtitle { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 13px; fill: #475569; }
+      .section-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-weight: 600; font-size: 15px; fill: #1e293b; }
+      .cell-text { font-family: "JetBrains Mono", "SF Mono", Consolas, monospace; font-weight: bold; font-size: 16px; fill: #1e3a8a; text-anchor: middle; dominant-baseline: central; }
+      .ptr-text { font-family: "JetBrains Mono", "SF Mono", Consolas, monospace; font-size: 12px; fill: #6d28d9; text-anchor: middle; dominant-baseline: central; }
+      .addr-text { font-family: "JetBrains Mono", "SF Mono", Consolas, monospace; font-size: 11px; fill: #64748b; }
+      .desc-text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 12px; fill: #334155; }
+      .badge-txt { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-weight: 600; font-size: 11px; fill: #ffffff; text-anchor: middle; dominant-baseline: central; }
+      .code-font { font-family: "JetBrains Mono", "SF Mono", Consolas, monospace; font-size: 12px; fill: #1e3a8a; }
+    </style>
+    <marker id="node-ptr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#3b82f6"/>
+    </marker>
+    <marker id="head-ptr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#7c3aed"/>
+    </marker>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect width="960" height="520" fill="#f8fafc" rx="12"/>
+  <rect x="12" y="12" width="936" height="496" fill="#ffffff" rx="10" stroke="#e2e8f0" stroke-width="1.5"/>
+
+  <!-- Title & Subtitle -->
+  <text x="36" y="42" class="title">Singly Linked List: Anatomy &amp; Heap Memory Architecture</text>
+  <text x="36" y="62" class="subtitle">Disjoint heap nodes, 64-bit pointer linking, head/tail tracking, and address layout</text>
+
+  <!-- TOP PANEL: Conceptual Node Structure -->
+  <g transform="translate(36, 85)">
+    <rect width="888" height="110" rx="8" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1"/>
+    <text x="20" y="24" class="section-title">Anatomy of a Singly Linked List Node (sizeof = 16 bytes on 64-bit OS)</text>
+
+    <g transform="translate(40, 40)">
+      <!-- Data Field -->
+      <rect x="0" y="0" width="120" height="45" rx="4" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5"/>
+      <text x="60" y="22" class="cell-text">int data</text>
+      <text x="60" y="38" class="desc-text" text-anchor="middle" font-size="10">4 bytes (+4B padding)</text>
+
+      <!-- Next Pointer Field -->
+      <rect x="120" y="0" width="140" height="45" rx="4" fill="#ede9fe" stroke="#8b5cf6" stroke-width="1.5"/>
+      <text x="190" y="22" class="ptr-text">Node* next</text>
+      <text x="190" y="38" class="desc-text" text-anchor="middle" font-size="10">8-byte memory address</text>
+    </g>
+
+    <g transform="translate(350, 42)">
+      <text x="0" y="15" class="code-font">struct Node {</text>
+      <text x="20" y="32" class="code-font">int data;</text>
+      <text x="20" y="49" class="code-font">Node* next;</text>
+      <text x="0" y="66" class="code-font">};</text>
+    </g>
+
+    <g transform="translate(540, 45)">
+      <text x="0" y="15" class="desc-text">• Nodes are created dynamically at runtime via <tspan class="code-font">new Node(val)</tspan>.</text>
+      <text x="0" y="32" class="desc-text">• Allocated on the <tspan font-weight="600" fill="#7c3aed">Heap</tspan> at non-contiguous memory locations.</text>
+      <text x="0" y="49" class="desc-text">• Pointers chain disjoint memory cells into a coherent linear sequence.</text>
+    </g>
+  </g>
+
+  <!-- BOTTOM PANEL: Linked List in Memory (Head -> 10 -> 20 -> 30 -> nullptr) -->
+  <g transform="translate(36, 210)">
+    <rect width="888" height="280" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+    <text x="24" y="28" class="section-title">Logical Representation &amp; Actual Heap Address Layout</text>
+
+    <!-- HEAD POINTER on Stack -->
+    <g transform="translate(30, 80)">
+      <rect x="0" y="0" width="85" height="48" rx="4" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+      <text x="42" y="20" class="desc-text" font-weight="bold" fill="#7c3aed" text-anchor="middle">head</text>
+      <text x="42" y="36" class="ptr-text">0x2080</text>
+      <line x1="85" y1="24" x2="135" y2="24" stroke="#7c3aed" stroke-width="2.5" marker-end="url(#head-ptr)"/>
+      <text x="42" y="65" class="addr-txt" text-anchor="middle">Stack Var</text>
+    </g>
+
+    <!-- NODE 1 (Addr: 0x2080, Data: 10, Next: 0x5410) -->
+    <g transform="translate(145, 65)">
+      <text x="65" y="-8" class="addr-txt" text-anchor="middle">@ 0x2080 (Heap)</text>
+      <rect x="0" y="0" width="65" height="48" rx="4" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5"/>
+      <text x="32" y="24" class="cell-text">10</text>
+      <rect x="65" y="0" width="65" height="48" rx="4" fill="#ede9fe" stroke="#8b5cf6" stroke-width="1.5"/>
+      <text x="97" y="24" class="ptr-text">0x5410</text>
+      <line x1="130" y1="24" x2="185" y2="24" stroke="#3b82f6" stroke-width="2.5" marker-end="url(#node-ptr)"/>
+    </g>
+
+    <!-- NODE 2 (Addr: 0x5410, Data: 20, Next: 0x1190) -->
+    <g transform="translate(340, 65)">
+      <text x="65" y="-8" class="addr-txt" text-anchor="middle">@ 0x5410 (Heap)</text>
+      <rect x="0" y="0" width="65" height="48" rx="4" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5"/>
+      <text x="32" y="24" class="cell-text">20</text>
+      <rect x="65" y="0" width="65" height="48" rx="4" fill="#ede9fe" stroke="#8b5cf6" stroke-width="1.5"/>
+      <text x="97" y="24" class="ptr-text">0x1190</text>
+      <line x1="130" y1="24" x2="185" y2="24" stroke="#3b82f6" stroke-width="2.5" marker-end="url(#node-ptr)"/>
+    </g>
+
+    <!-- NODE 3 (Addr: 0x1190, Data: 30, Next: nullptr) -->
+    <g transform="translate(535, 65)">
+      <text x="65" y="-8" class="addr-txt" text-anchor="middle">@ 0x1190 (Heap)</text>
+      <rect x="0" y="0" width="65" height="48" rx="4" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5"/>
+      <text x="32" y="24" class="cell-text">30</text>
+      <rect x="65" y="0" width="65" height="48" rx="4" fill="#ede9fe" stroke="#8b5cf6" stroke-width="1.5"/>
+      <text x="97" y="24" class="ptr-text">null</text>
+      <line x1="130" y1="24" x2="175" y2="24" stroke="#3b82f6" stroke-width="2.5" marker-end="url(#node-ptr)"/>
+      <text x="210" y="24" class="addr-txt" font-weight="bold" fill="#dc2626">nullptr</text>
+    </g>
+
+    <!-- TAIL POINTER -->
+    <g transform="translate(600, 140)">
+      <line x1="0" y1="0" x2="0" y2="-20" stroke="#7c3aed" stroke-width="2.5" marker-end="url(#head-ptr)"/>
+      <rect x="-40" y="0" width="80" height="32" rx="4" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.5"/>
+      <text x="0" y="16" class="desc-text" font-weight="bold" fill="#7c3aed" text-anchor="middle">tail ptr</text>
+    </g>
+
+    <!-- Tradeoffs Comparison Box -->
+    <g transform="translate(30, 190)">
+      <rect width="828" height="70" rx="6" fill="#f8fafc" stroke="#cbd5e1"/>
+      <text x="16" y="22" class="section-title" font-size="13">Fundamental Trade-offs vs Arrays:</text>
+      <text x="16" y="42" class="desc-text">• <tspan font-weight="600" fill="#15803d">O(1) Insertion &amp; Deletion at Head:</tspan> No shifting of downstream elements required.</text>
+      <text x="16" y="58" class="desc-text">• <tspan font-weight="600" fill="#dc2626">No Random Access:</tspan> Must traverse pointers sequentially in O(n) to reach element at index k (unlike arr[k] which is O(1)).</text>
+    </g>
+  </g>
+</svg>

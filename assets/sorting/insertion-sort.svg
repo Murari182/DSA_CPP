@@ -1,0 +1,147 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 520" width="100%" height="100%">
+  <defs>
+    <style>
+      .title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-weight: bold; font-size: 20px; fill: #0f172a; }
+      .subtitle { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 13px; fill: #475569; }
+      .section-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-weight: 600; font-size: 15px; fill: #1e293b; }
+      .cell-text { font-family: "JetBrains Mono", "SF Mono", Consolas, monospace; font-weight: bold; font-size: 15px; fill: #0f172a; text-anchor: middle; dominant-baseline: central; }
+      .cell-text-w { font-family: "JetBrains Mono", "SF Mono", Consolas, monospace; font-weight: bold; font-size: 15px; fill: #ffffff; text-anchor: middle; dominant-baseline: central; }
+      .key-txt { font-family: "JetBrains Mono", "SF Mono", Consolas, monospace; font-weight: bold; font-size: 14px; fill: #ea580c; text-anchor: middle; dominant-baseline: central; }
+      .pass-hdr { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-weight: 600; font-size: 13px; fill: #1e3a8a; }
+      .desc-text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 12px; fill: #334155; }
+      .code-font { font-family: "JetBrains Mono", "SF Mono", Consolas, monospace; font-size: 11px; fill: #1e3a8a; }
+    </style>
+    <marker id="shift-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#ea580c"/>
+    </marker>
+    <marker id="insert-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#16a34a"/>
+    </marker>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect width="960" height="520" fill="#f8fafc" rx="12"/>
+  <rect x="12" y="12" width="936" height="496" fill="#ffffff" rx="10" stroke="#e2e8f0" stroke-width="1.5"/>
+
+  <!-- Title & Subtitle -->
+  <text x="36" y="42" class="title">Insertion Sort: Key Extraction, Shifting &amp; Placement</text>
+  <text x="36" y="62" class="subtitle">Card-player intuition, expanding sorted prefix, and adaptive O(n) nearly-sorted efficiency</text>
+
+  <!-- LEFT PANEL: Step-by-Step Shifting Process -->
+  <g transform="translate(36, 85)">
+    <rect width="455" height="405" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+    <text x="20" y="28" class="section-title">Execution Trace on [5, 1, 4, 2, 8]</text>
+
+    <!-- Initial state -->
+    <g transform="translate(20, 45)">
+      <text x="0" y="14" class="desc-text" font-weight="600">Initial: Single-element sorted prefix [5]</text>
+      <rect x="0" y="22" width="38" height="32" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+      <text x="19" y="38" class="cell-text">5</text>
+      <rect x="42" y="22" width="38" height="32" rx="4" fill="#ffffff" stroke="#cbd5e1"/>
+      <text x="61" y="38" class="cell-text">1</text>
+      <rect x="84" y="22" width="38" height="32" rx="4" fill="#ffffff" stroke="#cbd5e1"/>
+      <text x="103" y="38" class="cell-text">4</text>
+      <rect x="126" y="22" width="38" height="32" rx="4" fill="#ffffff" stroke="#cbd5e1"/>
+      <text x="145" y="38" class="cell-text">2</text>
+      <rect x="168" y="22" width="38" height="32" rx="4" fill="#ffffff" stroke="#cbd5e1"/>
+      <text x="187" y="38" class="cell-text">8</text>
+      <line x1="40" y1="20" x2="40" y2="56" stroke="#16a34a" stroke-width="2.5" stroke-dasharray="3,3"/>
+      <text x="220" y="38" class="desc-text" fill="#15803d">Sorted | Unsorted</text>
+    </g>
+
+    <!-- Step 1: Insert 1 -->
+    <g transform="translate(20, 115)">
+      <text x="0" y="14" class="code-font">Step 1: key = 1. Compare with 5 (5 &gt; 1 → shift 5 right)</text>
+      <rect x="0" y="22" width="38" height="32" rx="4" fill="#ffedd5" stroke="#ea580c"/>
+      <text x="19" y="38" class="key-txt">[1]</text>
+      <rect x="42" y="22" width="38" height="32" rx="4" fill="#dcfce7" stroke="#16a34a"/>
+      <text x="61" y="38" class="cell-text">5</text>
+      <rect x="84" y="22" width="38" height="32" rx="4" fill="#ffffff" stroke="#cbd5e1"/>
+      <text x="103" y="38" class="cell-text">4</text>
+      <rect x="126" y="22" width="38" height="32" rx="4" fill="#ffffff" stroke="#cbd5e1"/>
+      <text x="145" y="38" class="cell-text">2</text>
+      <rect x="168" y="22" width="38" height="32" rx="4" fill="#ffffff" stroke="#cbd5e1"/>
+      <text x="187" y="38" class="cell-text">8</text>
+      <text x="220" y="38" class="desc-text">→ Placed at [0]: [1, 5]</text>
+    </g>
+
+    <!-- Step 2: Insert 4 -->
+    <g transform="translate(20, 185)">
+      <text x="0" y="14" class="code-font">Step 2: key = 4. Compare with 5 (5 &gt; 4 → shift 5), 1 &lt; 4 (stop)</text>
+      <rect x="0" y="22" width="38" height="32" rx="4" fill="#dcfce7" stroke="#16a34a"/>
+      <text x="19" y="38" class="cell-text">1</text>
+      <rect x="42" y="22" width="38" height="32" rx="4" fill="#ffedd5" stroke="#ea580c"/>
+      <text x="61" y="38" class="key-txt">[4]</text>
+      <rect x="84" y="22" width="38" height="32" rx="4" fill="#dcfce7" stroke="#16a34a"/>
+      <text x="103" y="38" class="cell-text">5</text>
+      <rect x="126" y="22" width="38" height="32" rx="4" fill="#ffffff" stroke="#cbd5e1"/>
+      <text x="145" y="38" class="cell-text">2</text>
+      <rect x="168" y="22" width="38" height="32" rx="4" fill="#ffffff" stroke="#cbd5e1"/>
+      <text x="187" y="38" class="cell-text">8</text>
+      <text x="220" y="38" class="desc-text">→ Placed at [1]: [1, 4, 5]</text>
+    </g>
+
+    <!-- Step 3: Insert 2 -->
+    <g transform="translate(20, 255)">
+      <text x="0" y="14" class="code-font">Step 3: key = 2. Shift 5, shift 4. 1 &lt; 2 (stop)</text>
+      <rect x="0" y="22" width="38" height="32" rx="4" fill="#dcfce7" stroke="#16a34a"/>
+      <text x="19" y="38" class="cell-text">1</text>
+      <rect x="42" y="22" width="38" height="32" rx="4" fill="#ffedd5" stroke="#ea580c"/>
+      <text x="61" y="38" class="key-txt">[2]</text>
+      <rect x="84" y="22" width="38" height="32" rx="4" fill="#dcfce7" stroke="#16a34a"/>
+      <text x="103" y="38" class="cell-text">4</text>
+      <rect x="126" y="22" width="38" height="32" rx="4" fill="#dcfce7" stroke="#16a34a"/>
+      <text x="145" y="38" class="cell-text">5</text>
+      <rect x="168" y="22" width="38" height="32" rx="4" fill="#ffffff" stroke="#cbd5e1"/>
+      <text x="187" y="38" class="cell-text">8</text>
+      <text x="220" y="38" class="desc-text">→ Placed at [1]: [1, 2, 4, 5]</text>
+    </g>
+
+    <!-- Final Result -->
+    <g transform="translate(20, 325)">
+      <text x="0" y="14" class="code-font">Step 4: key = 8. 5 &lt; 8 (no shifts). Insert at [4].</text>
+      <rect x="0" y="22" width="38" height="32" rx="4" fill="#16a34a"/>
+      <text x="19" y="38" class="cell-text-w">1</text>
+      <rect x="42" y="22" width="38" height="32" rx="4" fill="#16a34a"/>
+      <text x="61" y="38" class="cell-text-w">2</text>
+      <rect x="84" y="22" width="38" height="32" rx="4" fill="#16a34a"/>
+      <text x="103" y="38" class="cell-text-w">4</text>
+      <rect x="126" y="22" width="38" height="32" rx="4" fill="#16a34a"/>
+      <text x="145" y="38" class="cell-text-w">5</text>
+      <rect x="168" y="22" width="38" height="32" rx="4" fill="#16a34a"/>
+      <text x="187" y="38" class="cell-text-w">8</text>
+      <text x="220" y="38" class="desc-text" fill="#15803d" font-weight="600">Entire Array Sorted!</text>
+    </g>
+  </g>
+
+  <!-- RIGHT PANEL: Anatomy of the Inner Shift Loop -->
+  <g transform="translate(515, 85)">
+    <rect width="409" height="405" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+    <text x="24" y="28" class="section-title">Anatomy of the Shift Loop</text>
+
+    <!-- Visual Mechanics of Shift -->
+    <g transform="translate(24, 45)">
+      <rect width="361" height="135" rx="6" fill="#eff6ff" stroke="#bfdbfe"/>
+      <text x="14" y="22" class="pass-hdr">Why Shift instead of Swap?</text>
+      <text x="14" y="44" class="desc-text">• Swapping takes 3 assignments per step:</text>
+      <text x="24" y="60" class="code-font">temp = a; a = b; b = temp; (expensive!)</text>
+      <text x="14" y="80" class="desc-text">• Insertion sort stores <tspan font-weight="600" fill="#ea580c">key</tspan> in a temporary register,</text>
+      <text x="14" y="96" class="desc-text">  shifts elements right with a <tspan font-weight="600">single assignment</tspan>:</text>
+      <text x="24" y="114" class="code-font" fill="#15803d">arr[j + 1] = arr[j]; // 1 memory write</text>
+    </g>
+
+    <!-- Architectural Superpower Box -->
+    <g transform="translate(24, 195)">
+      <rect width="361" height="195" rx="6" fill="#f0fdf4" stroke="#bbf7d0"/>
+      <text x="14" y="22" class="pass-hdr" fill="#166534">Why Insertion Sort is Used in std::sort:</text>
+      <text x="14" y="42" class="desc-text">1. <tspan font-weight="600" fill="#15803d">Adaptive:</tspan> If array has k inversions, runs in O(n + k).</text>
+      <text x="14" y="58" class="desc-text">   For nearly-sorted input, it runs in blazing <tspan font-weight="600" fill="#15803d">O(n)</tspan>!</text>
+      <text x="14" y="76" class="desc-text">2. <tspan font-weight="600" fill="#15803d">Low Constant Factor:</tspan> Simple inner loop with zero</text>
+      <text x="14" y="92" class="desc-text">   function call overhead and perfect cache locality.</text>
+      <text x="14" y="110" class="desc-text">3. <tspan font-weight="600" fill="#15803d">Hybrid Sorting (Introsort / Timsort):</tspan> Standard C++</text>
+      <text x="14" y="126" class="desc-text">   libraries switch to Insertion Sort for partitions of</text>
+      <text x="14" y="142" class="desc-text">   size \( \le 16 \) elements!</text>
+      <text x="14" y="162" class="desc-text">• Stable? <tspan font-weight="600" fill="#15803d">YES</tspan> | In-Place? <tspan font-weight="600" fill="#15803d">YES</tspan> | Space: <tspan font-weight="600" fill="#15803d">O(1)</tspan></text>
+    </g>
+  </g>
+</svg>

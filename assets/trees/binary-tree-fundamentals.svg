@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 520" width="100%" height="100%">
+  <defs>
+    <style>
+      .title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-weight: bold; font-size: 20px; fill: #0f172a; }
+      .subtitle { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 13px; fill: #475569; }
+      .section-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-weight: 600; font-size: 15px; fill: #1e293b; }
+      .node-txt { font-family: "JetBrains Mono", "SF Mono", Consolas, monospace; font-weight: bold; font-size: 15px; fill: #ffffff; text-anchor: middle; dominant-baseline: central; }
+      .desc-text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 12px; fill: #334155; }
+      .code-font { font-family: "JetBrains Mono", "SF Mono", Consolas, monospace; font-size: 12px; fill: #1e3a8a; }
+      .badge-txt { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-weight: 600; font-size: 11px; fill: #ffffff; text-anchor: middle; dominant-baseline: central; }
+    </style>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect width="960" height="520" fill="#f8fafc" rx="12"/>
+  <rect x="12" y="12" width="936" height="496" fill="#ffffff" rx="10" stroke="#e2e8f0" stroke-width="1.5"/>
+
+  <!-- Title & Subtitle -->
+  <text x="36" y="42" class="title">Binary Tree Fundamentals &amp; Structural Taxonomy</text>
+  <text x="36" y="62" class="subtitle">Hierarchical node definitions, height vs depth, full, complete, perfect, and balanced trees</text>
+
+  <!-- LEFT PANEL: Labeled Binary Tree Hierarchy -->
+  <g transform="translate(36, 85)">
+    <rect width="440" height="405" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+    <text x="20" y="28" class="section-title">Tree Terminology &amp; Metrics</text>
+
+    <g transform="translate(40, 45)">
+      <!-- Level Markers on the left -->
+      <text x="0" y="30" class="desc-text" font-weight="600" fill="#64748b">Depth 0 (Root)</text>
+      <text x="0" y="90" class="desc-text" font-weight="600" fill="#64748b">Depth 1</text>
+      <text x="0" y="150" class="desc-text" font-weight="600" fill="#64748b">Depth 2 (Leaves)</text>
+
+      <!-- Edges -->
+      <line x1="220" y1="30" x2="160" y2="90" stroke="#94a3b8" stroke-width="2.5"/>
+      <line x1="220" y1="30" x2="280" y2="90" stroke="#94a3b8" stroke-width="2.5"/>
+      <line x1="160" y1="90" x2="130" y2="150" stroke="#94a3b8" stroke-width="2.5"/>
+      <line x1="160" y1="90" x2="190" y2="150" stroke="#94a3b8" stroke-width="2.5"/>
+      <line x1="280" y1="90" x2="250" y2="150" stroke="#94a3b8" stroke-width="2.5"/>
+      <line x1="280" y1="90" x2="310" y2="150" stroke="#94a3b8" stroke-width="2.5"/>
+
+      <!-- Root Node A -->
+      <circle cx="220" cy="30" r="18" fill="#7c3aed" stroke="#6d28d9" stroke-width="2"/>
+      <text x="220" y="30" class="node-txt">A</text>
+      <rect x="245" y="20" width="75" height="20" rx="3" fill="#ede9fe"/>
+      <text x="282" y="30" class="desc-text" fill="#6d28d9" text-anchor="middle" dominant-baseline="central">Root Node</text>
+
+      <!-- Internal Nodes B, C -->
+      <circle cx="160" cy="90" r="17" fill="#2563eb" stroke="#1d4ed8" stroke-width="2"/>
+      <text x="160" y="90" class="node-txt">B</text>
+
+      <circle cx="280" cy="90" r="17" fill="#2563eb" stroke="#1d4ed8" stroke-width="2"/>
+      <text x="280" y="90" class="node-txt">C</text>
+
+      <!-- Leaf Nodes D, E, F, G -->
+      <circle cx="130" cy="150" r="16" fill="#16a34a" stroke="#15803d" stroke-width="2"/>
+      <text x="130" y="150" class="node-txt">D</text>
+
+      <circle cx="190" cy="150" r="16" fill="#16a34a" stroke="#15803d" stroke-width="2"/>
+      <text x="190" y="150" class="node-txt">E</text>
+
+      <circle cx="250" cy="150" r="16" fill="#16a34a" stroke="#15803d" stroke-width="2"/>
+      <text x="250" y="150" class="node-txt">F</text>
+
+      <circle cx="310" cy="150" r="16" fill="#16a34a" stroke="#15803d" stroke-width="2"/>
+      <text x="310" y="150" class="node-txt">G</text>
+    </g>
+
+    <!-- Definitions Box -->
+    <g transform="translate(20, 240)">
+      <rect width="400" height="145" rx="6" fill="#eff6ff" stroke="#bfdbfe"/>
+      <text x="14" y="22" class="section-title" font-size="13">Fundamental Tree Metrics:</text>
+      <text x="14" y="42" class="desc-text">• <tspan font-weight="600">Depth of Node v:</tspan> Number of edges from Root to v (Depth(Root) = 0).</text>
+      <text x="14" y="60" class="desc-text">• <tspan font-weight="600">Height of Node v:</tspan> Longest downward path from v to a leaf (Height(Leaf) = 0).</text>
+      <text x="14" y="78" class="desc-text">• <tspan font-weight="600">Height of Tree:</tspan> Height of Root node (here Height = 2).</text>
+      <text x="14" y="96" class="desc-text">• <tspan font-weight="600">Leaf Node:</tspan> Node with 0 children (Nodes D, E, F, G).</text>
+      <text x="14" y="114" class="desc-text">• <tspan font-weight="600">Internal Node:</tspan> Non-leaf node with at least one child (A, B, C).</text>
+      <text x="14" y="132" class="desc-text">• <tspan font-weight="600">Max Nodes at Level i:</tspan> \( 2^i \). Max total nodes: \( 2^{h+1} - 1 \).</text>
+    </g>
+  </g>
+
+  <!-- RIGHT PANEL: 4 Binary Tree Archetypes -->
+  <g transform="translate(500, 85)">
+    <rect width="424" height="405" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+    <text x="24" y="28" class="section-title">The 4 Key Binary Tree Archetypes</text>
+
+    <!-- 1. Full Binary Tree -->
+    <g transform="translate(24, 45)">
+      <rect width="376" height="75" rx="6" fill="#ffffff" stroke="#cbd5e1"/>
+      <text x="12" y="22" class="code-font" fill="#1e40af">1. Full Binary Tree (Strict Binary Tree)</text>
+      <text x="12" y="42" class="desc-text">Every node has <tspan font-weight="600">exactly 0 or 2 children</tspan>. No node has only 1 child.</text>
+      <text x="12" y="58" class="desc-text">Property: Number of leaves \( L = I + 1 \) (Internal nodes + 1).</text>
+    </g>
+
+    <!-- 2. Complete Binary Tree -->
+    <g transform="translate(24, 130)">
+      <rect width="376" height="75" rx="6" fill="#ffffff" stroke="#cbd5e1"/>
+      <text x="12" y="22" class="code-font" fill="#15803d">2. Complete Binary Tree (Heap Foundation)</text>
+      <text x="12" y="42" class="desc-text">All levels are completely filled, except possibly the last level,</text>
+      <text x="12" y="58" class="desc-text">which is filled <tspan font-weight="600" fill="#15803d">strictly from left to right</tspan>. Perfectly maps to 1D arrays!</text>
+    </g>
+
+    <!-- 3. Perfect Binary Tree -->
+    <g transform="translate(24, 215)">
+      <rect width="376" height="75" rx="6" fill="#ffffff" stroke="#cbd5e1"/>
+      <text x="12" y="22" class="code-font" fill="#7c3aed">3. Perfect Binary Tree</text>
+      <text x="12" y="42" class="desc-text">All internal nodes have 2 children, and all leaves are at the exact</text>
+      <text x="12" y="58" class="desc-text">same depth. Total nodes strictly \( n = 2^{h+1} - 1 \).</text>
+    </g>
+
+    <!-- 4. Balanced Binary Tree -->
+    <g transform="translate(24, 300)">
+      <rect width="376" height="85" rx="6" fill="#f0fdf4" stroke="#86efac"/>
+      <text x="12" y="22" class="code-font" fill="#15803d">4. Balanced Binary Tree (AVL / Red-Black)</text>
+      <text x="12" y="42" class="desc-text">For every node, the height difference between left and right subtrees</text>
+      <text x="12" y="58" class="desc-text">is at most 1: <tspan class="code-font" fill="#15803d">|height(left) - height(right)| &lt;= 1</tspan>.</text>
+      <text x="12" y="74" class="desc-text">Guarantees \( O(\log n) \) search, insertion, and deletion operations!</text>
+    </g>
+  </g>
+</svg>

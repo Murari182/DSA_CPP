@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 520" width="100%" height="100%">
+  <defs>
+    <style>
+      .title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-weight: bold; font-size: 20px; fill: #0f172a; }
+      .subtitle { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 13px; fill: #475569; }
+      .section-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-weight: 600; font-size: 15px; fill: #1e293b; }
+      .cell-text { font-family: "JetBrains Mono", "SF Mono", Consolas, monospace; font-weight: bold; font-size: 15px; fill: #1e3a8a; text-anchor: middle; dominant-baseline: central; }
+      .ptr-text { font-family: "JetBrains Mono", "SF Mono", Consolas, monospace; font-size: 11px; fill: #6d28d9; text-anchor: middle; dominant-baseline: central; }
+      .desc-text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 12px; fill: #334155; }
+      .code-font { font-family: "JetBrains Mono", "SF Mono", Consolas, monospace; font-size: 12px; fill: #1e3a8a; }
+    </style>
+    <marker id="circ-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#2563eb"/>
+    </marker>
+    <marker id="circ-purple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#7c3aed"/>
+    </marker>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect width="960" height="520" fill="#f8fafc" rx="12"/>
+  <rect x="12" y="12" width="936" height="496" fill="#ffffff" rx="10" stroke="#e2e8f0" stroke-width="1.5"/>
+
+  <!-- Title & Subtitle -->
+  <text x="36" y="42" class="title">Circular Linked Lists: Singly &amp; Doubly Ring Topologies</text>
+  <text x="36" y="62" class="subtitle">Closed-loop tail-to-head linking, O(1) front/back operations via tail pointer, and OS scheduling use cases</text>
+
+  <!-- LEFT PANEL: Circular Singly Linked List -->
+  <g transform="translate(36, 85)">
+    <rect width="425" height="405" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+    <text x="20" y="28" class="section-title">1. Circular Singly Linked List</text>
+    <text x="20" y="48" class="desc-text">Tail's next points back to Head: <tspan class="code-font">tail-&gt;next = head</tspan></text>
+
+    <!-- Ring of 3 Nodes -->
+    <g transform="translate(40, 70)">
+      <!-- Node 1 (10 - Head) -->
+      <g transform="translate(0, 0)">
+        <rect x="0" y="0" width="45" height="40" rx="4" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+        <text x="22" y="20" class="cell-text">10</text>
+        <rect x="45" y="0" width="35" height="40" rx="4" fill="#ede9fe" stroke="#8b5cf6"/>
+        <text x="62" y="20" class="ptr-text">next</text>
+      </g>
+
+      <!-- 10 -> 20 -->
+      <path d="M 80 20 L 140 20" fill="none" stroke="#2563eb" stroke-width="2.5" marker-end="url(#circ-blue)"/>
+
+      <!-- Node 2 (20) -->
+      <g transform="translate(145, 0)">
+        <rect x="0" y="0" width="45" height="40" rx="4" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+        <text x="22" y="20" class="cell-text">20</text>
+        <rect x="45" y="0" width="35" height="40" rx="4" fill="#ede9fe" stroke="#8b5cf6"/>
+        <text x="62" y="20" class="ptr-text">next</text>
+      </g>
+
+      <!-- 20 -> 30 -->
+      <path d="M 225 20 L 280 20" fill="none" stroke="#2563eb" stroke-width="2.5" marker-end="url(#circ-blue)"/>
+
+      <!-- Node 3 (30 - Tail) -->
+      <g transform="translate(285, 0)">
+        <rect x="0" y="0" width="45" height="40" rx="4" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+        <text x="22" y="20" class="cell-text">30</text>
+        <rect x="45" y="0" width="35" height="40" rx="4" fill="#ede9fe" stroke="#8b5cf6"/>
+        <text x="62" y="20" class="ptr-text">next</text>
+      </g>
+
+      <!-- Circular Feedback Arrow from Tail (30) back to Head (10) -->
+      <path d="M 330 40 C 330 110, 30 110, 30 50" fill="none" stroke="#7c3aed" stroke-width="2.5" stroke-dasharray="5,4" marker-end="url(#circ-purple)"/>
+      <rect x="110" y="80" width="145" height="22" rx="3" fill="#ede9fe" stroke="#8b5cf6"/>
+      <text x="182" y="91" class="ptr-text" text-anchor="middle" dominant-baseline="central">tail-&gt;next == head</text>
+    </g>
+
+    <g transform="translate(20, 240)">
+      <rect width="385" height="145" rx="6" fill="#eff6ff" stroke="#bfdbfe"/>
+      <text x="14" y="22" class="section-title" font-size="13">The Single 'tail' Pointer Trick:</text>
+      <text x="14" y="44" class="desc-text">• If we store only a pointer to <tspan font-weight="600" fill="#7c3aed">tail</tspan>:</text>
+      <text x="24" y="62" class="code-font">• head = tail-&gt;next (O(1) access!)</text>
+      <text x="24" y="80" class="code-font">• tail = tail (O(1) access!)</text>
+      <text x="14" y="102" class="desc-text">• Allows <tspan font-weight="600" fill="#15803d">O(1) insertion at both beginning and end</tspan></text>
+      <text x="14" y="118" class="desc-text">  with a single reference pointer!</text>
+      <text x="14" y="134" class="desc-text">• Never encounters <tspan class="code-font">nullptr</tspan>; loop terminates when <tspan class="code-font">curr == head</tspan>.</text>
+    </g>
+  </g>
+
+  <!-- RIGHT PANEL: Circular Doubly Linked List -->
+  <g transform="translate(485, 85)">
+    <rect width="439" height="405" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+    <text x="24" y="28" class="section-title">2. Circular Doubly Linked List</text>
+    <text x="24" y="48" class="desc-text">Both forward &amp; backward circular connections</text>
+
+    <g transform="translate(30, 80)">
+      <!-- Ring diagram text -->
+      <rect width="379" height="110" rx="6" fill="#f0fdf4" stroke="#bbf7d0"/>
+      <text x="16" y="24" class="section-title" font-size="13">Dual Closed-Loop Invariants:</text>
+      <text x="16" y="48" class="code-font" fill="#15803d">• head-&gt;prev = tail</text>
+      <text x="16" y="68" class="code-font" fill="#15803d">• tail-&gt;next = head</text>
+      <text x="16" y="92" class="desc-text">Every node has valid non-null prev and next pointers!</text>
+    </g>
+
+    <g transform="translate(30, 215)">
+      <rect width="379" height="170" rx="6" fill="#f1f5f9" stroke="#cbd5e1"/>
+      <text x="14" y="22" class="section-title" font-size="13">Real-World Systems Applications:</text>
+      <text x="14" y="44" class="desc-text">1. <tspan font-weight="600">Round-Robin CPU Scheduling:</tspan> The operating system</text>
+      <text x="14" y="60" class="desc-text">   cycles through active processes in a circular queue.</text>
+      <text x="14" y="80" class="desc-text">2. <tspan font-weight="600">Media Player Repeat Playlists:</tspan> Last track loops</text>
+      <text x="14" y="96" class="desc-text">   seamlessly back to the first track.</text>
+      <text x="14" y="116" class="desc-text">3. <tspan font-weight="600">Multiplayer Turn Rotation:</tspan> Board games cycle turns</text>
+      <text x="14" y="132" class="desc-text">   from Player N back to Player 1.</text>
+      <text x="14" y="152" class="desc-text">4. <tspan font-weight="600">Fibonacci Heaps &amp; Linux Kernel Lists</tspan>.</text>
+    </g>
+  </g>
+</svg>

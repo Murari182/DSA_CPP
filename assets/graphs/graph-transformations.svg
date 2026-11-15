@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 520" width="100%" height="100%">
+  <defs>
+    <style>
+      .title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-weight: bold; font-size: 20px; fill: #0f172a; }
+      .subtitle { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 13px; fill: #475569; }
+      .section-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-weight: 600; font-size: 15px; fill: #1e293b; }
+      .node-text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-weight: bold; font-size: 15px; fill: #ffffff; text-anchor: middle; dominant-baseline: central; }
+      .mono-code { font-family: "JetBrains Mono", "SF Mono", Consolas, monospace; font-size: 12px; fill: #1e3a8a; }
+      .desc-text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 12px; fill: #334155; }
+      .badge-txt { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-weight: 600; font-size: 11px; fill: #ffffff; text-anchor: middle; dominant-baseline: central; }
+      .callout { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 12px; font-weight: 600; }
+    </style>
+    <marker id="ptr-orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#ea580c"/>
+    </marker>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect width="960" height="520" fill="#f8fafc" rx="12"/>
+  <rect x="12" y="12" width="936" height="496" fill="#ffffff" rx="10" stroke="#e2e8f0" stroke-width="1.5"/>
+
+  <!-- Title & Subtitle -->
+  <text x="36" y="42" class="title">Graph Dynamic Transformations: Edge &amp; Vertex Additions</text>
+  <text x="36" y="62" class="subtitle">Comparing O(1) edge additions vs V-expansion in raw arrays vs std::vector</text>
+
+  <!-- LEFT PANEL: Transformation 1 - Edge Insertion -->
+  <g transform="translate(36, 85)">
+    <rect width="425" height="405" rx="8" fill="#fff7ed" stroke="#fed7aa" stroke-width="1.5"/>
+    <rect x="16" y="14" width="130" height="24" rx="4" fill="#ea580c"/>
+    <text x="81" y="26" class="badge-txt">OPERATION 1: ADD EDGE</text>
+    <text x="16" y="58" class="mono-code">g.undi_adj_list(3, 4);</text>
+
+    <!-- Visual Graph with New Edge -->
+    <g transform="translate(15, 65)">
+      <line x1="50" y1="70" x2="130" y2="40" stroke="#94a3b8" stroke-width="2.5"/>
+      <line x1="130" y1="40" x2="210" y2="70" stroke="#94a3b8" stroke-width="2.5"/>
+      <line x1="130" y1="40" x2="130" y2="140" stroke="#94a3b8" stroke-width="2.5"/>
+      <line x1="210" y1="70" x2="130" y2="140" stroke="#94a3b8" stroke-width="2.5"/>
+      <line x1="210" y1="70" x2="230" y2="150" stroke="#94a3b8" stroke-width="2.5"/>
+
+      <!-- NEW EDGE (3, 4) Highlighted in Bright Orange -->
+      <line x1="130" y1="140" x2="230" y2="150" stroke="#ea580c" stroke-width="4" stroke-dasharray="6,4"/>
+
+      <!-- Nodes -->
+      <circle cx="50" cy="70" r="15" fill="#64748b"/>
+      <text x="50" y="70" class="node-text">0</text>
+      <circle cx="130" cy="40" r="15" fill="#64748b"/>
+      <text x="130" y="40" class="node-text">1</text>
+      <circle cx="210" cy="70" r="15" fill="#64748b"/>
+      <text x="210" y="70" class="node-text">2</text>
+      <circle cx="130" cy="140" r="16" fill="#ea580c" stroke="#c2410c" stroke-width="2"/>
+      <text x="130" y="140" class="node-text">3</text>
+      <circle cx="230" cy="150" r="16" fill="#ea580c" stroke="#c2410c" stroke-width="2"/>
+      <text x="230" y="150" class="node-text">4</text>
+
+      <rect x="250" y="130" width="130" height="30" rx="4" fill="#ffedd5" stroke="#ea580c"/>
+      <text x="315" y="145" class="callout" fill="#c2410c" text-anchor="middle" dominant-baseline="central">New Edge (3, 4)</text>
+    </g>
+
+    <!-- Adjacency List State Changes -->
+    <g transform="translate(16, 250)">
+      <rect width="393" height="135" rx="6" fill="#ffffff" stroke="#fed7aa"/>
+      <text x="14" y="22" class="callout" fill="#9a3412">List Appends (Constant Time O(1)):</text>
+      <text x="14" y="44" class="mono-code">arr[3].push_back(4); // [2, 1] → [2, 1, 4]</text>
+      <text x="14" y="66" class="mono-code">arr[4].push_back(3); // [2]    → [2, 3]</text>
+
+      <text x="14" y="94" class="desc-text">• Only the linked lists of vertex 3 and 4 allocate a new node.</text>
+      <text x="14" y="112" class="desc-text">• The outer array <tspan class="mono-code">arr</tspan> remains unchanged in size (still V = 5).</text>
+      <text x="14" y="128" class="desc-text">• Time Complexity: <tspan font-weight="600" fill="#15803d">O(1)</tspan> per edge.</text>
+    </g>
+  </g>
+
+  <!-- RIGHT PANEL: Transformation 2 - Adding a New Vertex -->
+  <g transform="translate(485, 85)">
+    <rect width="439" height="405" rx="8" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1.5"/>
+    <rect x="16" y="14" width="145" height="24" rx="4" fill="#16a34a"/>
+    <text x="88" y="26" class="badge-txt">OPERATION 2: ADD VERTEX</text>
+    <text x="16" y="58" class="mono-code">Add Vertex 5 (V: 5 → 6)</text>
+
+    <!-- Sub-Box 1: Raw Dynamic Array Failure & Reallocation -->
+    <g transform="translate(16, 75)">
+      <rect width="407" height="145" rx="6" fill="#ffffff" stroke="#fca5a5" stroke-width="1.5"/>
+      <rect x="10" y="8" width="180" height="20" rx="3" fill="#fee2e2"/>
+      <text x="100" y="18" class="badge-txt" fill="#991b1b">RAW ARRAY: list&lt;int&gt;* arr</text>
+
+      <text x="12" y="45" class="desc-text">• <tspan font-weight="600" fill="#dc2626">Buffer Overflow Warning:</tspan> <tspan class="mono-code">arr[5]</tspan> is OUT-OF-BOUNDS!</text>
+      <text x="12" y="63" class="desc-text">• Fixed heap buffer cannot expand in place.</text>
+      <text x="12" y="81" class="desc-text">• Must reallocate: </text>
+      <text x="24" y="99" class="mono-code">list&lt;int&gt;* newArr = new list&lt;int&gt;[6];</text>
+      <text x="24" y="117" class="mono-code">for(i=0; i&lt;5; ++i) newArr[i] = move(arr[i]);</text>
+      <text x="24" y="133" class="mono-code">delete[] arr; arr = newArr; V = 6; // O(V) work</text>
+    </g>
+
+    <!-- Sub-Box 2: Modern std::vector Resizing -->
+    <g transform="translate(16, 235)">
+      <rect width="407" height="150" rx="6" fill="#ffffff" stroke="#86efac" stroke-width="1.5"/>
+      <rect x="10" y="8" width="220" height="20" rx="3" fill="#dcfce7"/>
+      <text x="120" y="18" class="badge-txt" fill="#166534">MODERN: vector&lt;vector&lt;int&gt;&gt; adj</text>
+
+      <text x="12" y="45" class="mono-code" fill="#15803d">adj.push_back({}); // Adds vertex 5</text>
+      <text x="12" y="65" class="desc-text">• If <tspan class="mono-code">size &lt; capacity</tspan>: Instant <tspan font-weight="600" fill="#15803d">O(1)</tspan> pointer append.</text>
+      <text x="12" y="83" class="desc-text">• If full: Automatically allocates 2× capacity buffer,</text>
+      <text x="12" y="101" class="desc-text">  moves existing inner vectors, and frees old memory.</text>
+      <text x="12" y="119" class="desc-text">• <tspan font-weight="600" fill="#15803d">Amortized O(1)</tspan> time per vertex addition!</text>
+      <text x="12" y="137" class="desc-text">• Zero memory leak danger (automatic RAII destructor).</text>
+    </g>
+  </g>
+</svg>

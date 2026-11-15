@@ -1,0 +1,121 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 520" width="100%" height="100%">
+  <defs>
+    <style>
+      .title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-weight: bold; font-size: 20px; fill: #0f172a; }
+      .subtitle { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 13px; fill: #475569; }
+      .section-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-weight: 600; font-size: 15px; fill: #1e293b; }
+      .node-txt { font-family: "JetBrains Mono", "SF Mono", Consolas, monospace; font-weight: bold; font-size: 15px; fill: #ffffff; text-anchor: middle; dominant-baseline: central; }
+      .desc-text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 12px; fill: #334155; }
+      .code-font { font-family: "JetBrains Mono", "SF Mono", Consolas, monospace; font-size: 12px; fill: #1e3a8a; }
+      .proof-math { font-family: "JetBrains Mono", "SF Mono", Consolas, monospace; font-weight: bold; font-size: 13px; fill: #15803d; }
+    </style>
+    <marker id="cycle-arr" viewBox="0 0 10 10" refX="22" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#3b82f6"/>
+    </marker>
+    <marker id="meet-arr" viewBox="0 0 10 10" refX="22" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#ea580c"/>
+    </marker>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect width="960" height="520" fill="#f8fafc" rx="12"/>
+  <rect x="12" y="12" width="936" height="496" fill="#ffffff" rx="10" stroke="#e2e8f0" stroke-width="1.5"/>
+
+  <!-- Title & Subtitle -->
+  <text x="36" y="42" class="title">Floyd's Cycle Finding: Tortoise &amp; Hare Mathematical Proof</text>
+  <text x="36" y="62" class="subtitle">Fast (2x) and Slow (1x) pointer convergence, cycle detection, and finding cycle origin</text>
+
+  <!-- LEFT PANEL: Visual Graph with Cycle -->
+  <g transform="translate(36, 85)">
+    <rect width="460" height="405" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+    <text x="20" y="28" class="section-title">Geometry of a Linked List with Cycle</text>
+
+    <!-- Linear Prefix (Distance L) -->
+    <g transform="translate(20, 60)">
+      <!-- Head Node 1 -->
+      <circle cx="30" cy="80" r="18" fill="#2563eb" stroke="#1d4ed8" stroke-width="2"/>
+      <text x="30" y="80" class="node-txt">1</text>
+      <text x="30" y="112" class="desc-text" text-anchor="middle" font-weight="bold">Head</text>
+
+      <line x1="48" y1="80" x2="102" y2="80" stroke="#3b82f6" stroke-width="2.5" marker-end="url(#cycle-arr)"/>
+
+      <!-- Node 2 -->
+      <circle cx="120" cy="80" r="18" fill="#2563eb" stroke="#1d4ed8" stroke-width="2"/>
+      <text x="120" y="80" class="node-txt">2</text>
+
+      <line x1="138" y1="80" x2="192" y2="80" stroke="#3b82f6" stroke-width="2.5" marker-end="url(#cycle-arr)"/>
+
+      <!-- Bracket for Distance L -->
+      <path d="M 30 50 L 120 50 L 210 50" fill="none" stroke="#7c3aed" stroke-width="1.5"/>
+      <text x="120" y="40" class="desc-text" font-weight="bold" fill="#7c3aed" text-anchor="middle">Distance L (to Cycle Entry)</text>
+
+      <!-- Cycle Entry Node 3 -->
+      <circle cx="210" cy="80" r="20" fill="#16a34a" stroke="#15803d" stroke-width="2.5"/>
+      <text x="210" y="80" class="node-txt">3</text>
+      <text x="210" y="115" class="desc-text" font-weight="bold" fill="#15803d" text-anchor="middle">Entry</text>
+
+      <!-- Circular Loop (Nodes 3, 4, 5, 6) -->
+      <!-- 3 -> 4 -->
+      <line x1="228" y1="70" x2="282" y2="35" stroke="#3b82f6" stroke-width="2.5" marker-end="url(#cycle-arr)"/>
+      <circle cx="300" cy="25" r="18" fill="#2563eb"/>
+      <text x="300" y="25" class="node-txt">4</text>
+
+      <!-- 4 -> 5 (Meeting Point M) -->
+      <line x1="318" y1="25" x2="372" y2="80" stroke="#ea580c" stroke-width="2.5" marker-end="url(#meet-arr)"/>
+      <circle cx="390" cy="80" r="20" fill="#ea580c" stroke="#c2410c" stroke-width="2.5"/>
+      <text x="390" y="80" class="node-txt">5</text>
+      <text x="390" y="115" class="desc-text" font-weight="bold" fill="#ea580c" text-anchor="middle">Meet (M)</text>
+
+      <!-- 5 -> 6 -->
+      <line x1="372" y1="95" x2="318" y2="135" stroke="#3b82f6" stroke-width="2.5" marker-end="url(#cycle-arr)"/>
+      <circle cx="300" cy="135" r="18" fill="#2563eb"/>
+      <text x="300" y="135" class="node-txt">6</text>
+
+      <!-- 6 -> 3 (Closing cycle) -->
+      <line x1="282" y1="125" x2="228" y2="90" stroke="#3b82f6" stroke-width="2.5" marker-end="url(#cycle-arr)"/>
+
+      <!-- Annotations for distances inside cycle -->
+      <text x="310" y="65" class="desc-text" fill="#ea580c" font-weight="bold">dist = x</text>
+      <text x="240" y="125" class="desc-text" fill="#1e3a8a">dist = C - x</text>
+    </g>
+
+    <!-- Legend Box -->
+    <g transform="translate(20, 245)">
+      <rect width="420" height="135" rx="6" fill="#f1f5f9" stroke="#cbd5e1"/>
+      <text x="14" y="22" class="section-title" font-size="13">Definitions:</text>
+      <text x="14" y="44" class="desc-text">• <tspan font-weight="600" fill="#7c3aed">L:</tspan> Distance from head to cycle entrance (Node 3).</text>
+      <text x="14" y="62" class="desc-text">• <tspan font-weight="600" fill="#15803d">C:</tspan> Total perimeter / length of the cycle (4 nodes).</text>
+      <text x="14" y="80" class="desc-text">• <tspan font-weight="600" fill="#ea580c">x:</tspan> Distance from cycle entrance to meeting point M (Node 5).</text>
+      <text x="14" y="98" class="desc-text">• <tspan font-weight="600">C - x:</tspan> Remaining distance from M to cycle entrance.</text>
+      <text x="14" y="118" class="desc-text">• Time Complexity: <tspan font-weight="600" fill="#15803d">O(n)</tspan> | Auxiliary Space: <tspan font-weight="600" fill="#15803d">O(1)</tspan>.</text>
+    </g>
+  </g>
+
+  <!-- RIGHT PANEL: The Mathematical Proof -->
+  <g transform="translate(520, 85)">
+    <rect width="404" height="405" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+    <text x="24" y="28" class="section-title">The Exact Mathematical Proof</text>
+
+    <g transform="translate(24, 45)">
+      <rect width="356" height="335" rx="6" fill="#f0fdf4" stroke="#bbf7d0"/>
+      <text x="16" y="24" class="code-font" fill="#166534">Step 1: Distance Relations</text>
+      <text x="16" y="48" class="desc-text">When slow and fast meet at M:</text>
+      <text x="24" y="68" class="code-font">• Distance(slow) = L + x</text>
+      <text x="24" y="88" class="code-font">• Distance(fast) = L + x + nC</text>
+
+      <text x="16" y="116" class="code-font" fill="#166534">Step 2: Speed Ratio (fast = 2 × slow)</text>
+      <text x="24" y="136" class="code-font">2(L + x) = L + x + nC</text>
+      <text x="24" y="156" class="code-font">2L + 2x = L + x + nC</text>
+      <text x="24" y="176" class="code-font" font-weight="bold" fill="#15803d">L + x = nC</text>
+      <text x="24" y="200" class="proof-math">L = nC - x = (n - 1)C + (C - x)</text>
+
+      <text x="16" y="232" class="code-font" fill="#166534">Step 3: The Incredible Consequence!</text>
+      <text x="16" y="254" class="desc-text">The distance from Head to Cycle Entry (<tspan font-weight="bold">L</tspan>)</text>
+      <text x="16" y="270" class="desc-text">is mathematically identical to the distance</text>
+      <text x="16" y="286" class="desc-text">from Meeting Point M to Cycle Entry (<tspan font-weight="bold">C - x</tspan>)!</text>
+
+      <text x="16" y="312" class="desc-text" font-weight="bold" fill="#15803d">Reset slow to head; advance both by 1 step.</text>
+      <text x="16" y="326" class="desc-text" font-weight="bold" fill="#15803d">They collide EXACTLY at the cycle entrance!</text>
+    </g>
+  </g>
+</svg>

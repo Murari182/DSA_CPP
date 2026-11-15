@@ -1,0 +1,134 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="100%" height="100%">
+  <defs>
+    <style>
+      .title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-weight: bold; font-size: 20px; fill: #0f172a; }
+      .subtitle { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 13px; fill: #475569; }
+      .section-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-weight: 600; font-size: 15px; fill: #1e293b; }
+      .node-box { font-family: "JetBrains Mono", "SF Mono", Consolas, monospace; font-weight: bold; font-size: 14px; fill: #1e3a8a; text-anchor: middle; dominant-baseline: central; }
+      .node-box-g { font-family: "JetBrains Mono", "SF Mono", Consolas, monospace; font-weight: bold; font-size: 14px; fill: #15803d; text-anchor: middle; dominant-baseline: central; }
+      .desc-text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 12px; fill: #334155; }
+      .pass-hdr { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-weight: 600; font-size: 13px; fill: #1e3a8a; }
+      .code-font { font-family: "JetBrains Mono", "SF Mono", Consolas, monospace; font-size: 11px; fill: #1e3a8a; }
+    </style>
+    <marker id="split-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#3b82f6"/>
+    </marker>
+    <marker id="merge-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#16a34a"/>
+    </marker>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect width="960" height="540" fill="#f8fafc" rx="12"/>
+  <rect x="12" y="12" width="936" height="516" fill="#ffffff" rx="10" stroke="#e2e8f0" stroke-width="1.5"/>
+
+  <!-- Title & Subtitle -->
+  <text x="36" y="42" class="title">Merge Sort: Divide-and-Conquer Tree &amp; 2-Pointer Merging</text>
+  <text x="36" y="62" class="subtitle">Recursive halving, O(n) linear merge step, guaranteed O(n log n) stability, and O(n) auxiliary memory</text>
+
+  <!-- LEFT PANEL: The Recursion Tree (Divide & Conquer) -->
+  <g transform="translate(36, 85)">
+    <rect width="470" height="425" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+    <text x="20" y="28" class="section-title">Divide &amp; Conquer Tree on [5, 1, 4, 2, 8]</text>
+
+    <g transform="translate(25, 45)">
+      <!-- Level 0 (Root) -->
+      <rect x="140" y="0" width="140" height="30" rx="4" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5"/>
+      <text x="210" y="15" class="node-box">[5, 1, 4, 2, 8]</text>
+
+      <!-- Split Level 0 -> Level 1 -->
+      <line x1="180" y1="30" x2="100" y2="60" stroke="#3b82f6" stroke-width="2" marker-end="url(#split-arr)"/>
+      <line x1="240" y1="30" x2="310" y2="60" stroke="#3b82f6" stroke-width="2" marker-end="url(#split-arr)"/>
+
+      <!-- Level 1 (Left & Right) -->
+      <rect x="40" y="62" width="105" height="28" rx="4" fill="#dbeafe" stroke="#3b82f6"/>
+      <text x="92" y="76" class="node-box">[5, 1, 4]</text>
+
+      <rect x="270" y="62" width="85" height="28" rx="4" fill="#dbeafe" stroke="#3b82f6"/>
+      <text x="312" y="76" class="node-box">[2, 8]</text>
+
+      <!-- Split Level 1 -> Level 2 -->
+      <line x1="70" y1="90" x2="45" y2="120" stroke="#3b82f6" stroke-width="2" marker-end="url(#split-arr)"/>
+      <line x1="110" y1="90" x2="135" y2="120" stroke="#3b82f6" stroke-width="2" marker-end="url(#split-arr)"/>
+      <line x1="295" y1="90" x2="275" y2="120" stroke="#3b82f6" stroke-width="2" marker-end="url(#split-arr)"/>
+      <line x1="330" y1="90" x2="350" y2="120" stroke="#3b82f6" stroke-width="2" marker-end="url(#split-arr)"/>
+
+      <!-- Level 2 -->
+      <rect x="10" y="122" width="70" height="26" rx="4" fill="#dbeafe" stroke="#3b82f6"/>
+      <text x="45" y="135" class="node-box">[5, 1]</text>
+
+      <rect x="115" y="122" width="45" height="26" rx="4" fill="#dcfce7" stroke="#16a34a"/>
+      <text x="137" y="135" class="node-box-g">[4]</text>
+
+      <rect x="250" y="122" width="45" height="26" rx="4" fill="#dcfce7" stroke="#16a34a"/>
+      <text x="272" y="135" class="node-box-g">[2]</text>
+
+      <rect x="330" y="122" width="45" height="26" rx="4" fill="#dcfce7" stroke="#16a34a"/>
+      <text x="352" y="135" class="node-box-g">[8]</text>
+
+      <!-- Split [5, 1] -> [5] and [1] -->
+      <line x1="30" y1="148" x2="15" y2="175" stroke="#3b82f6" stroke-width="2" marker-end="url(#split-arr)"/>
+      <line x1="60" y1="148" x2="75" y2="175" stroke="#3b82f6" stroke-width="2" marker-end="url(#split-arr)"/>
+
+      <rect x="0" y="177" width="40" height="26" rx="4" fill="#dcfce7" stroke="#16a34a"/>
+      <text x="20" y="190" class="node-box-g">[5]</text>
+      <rect x="55" y="177" width="40" height="26" rx="4" fill="#dcfce7" stroke="#16a34a"/>
+      <text x="75" y="190" class="node-box-g">[1]</text>
+
+      <!-- MERGE ARROWS (Green ascending) -->
+      <path d="M 40 205 C 40 230, 45 230, 45 235" fill="none" stroke="#16a34a" stroke-width="2" marker-end="url(#merge-arr)"/>
+      <rect x="10" y="237" width="70" height="26" rx="4" fill="#dcfce7" stroke="#16a34a"/>
+      <text x="45" y="250" class="node-box-g">[1, 5]</text>
+
+      <!-- Merge [1, 5] and [4] -> [1, 4, 5] -->
+      <path d="M 60 265 C 60 290, 85 290, 85 295" fill="none" stroke="#16a34a" stroke-width="2" marker-end="url(#merge-arr)"/>
+      <rect x="40" y="297" width="105" height="28" rx="4" fill="#dcfce7" stroke="#16a34a"/>
+      <text x="92" y="311" class="node-box-g">[1, 4, 5]</text>
+
+      <!-- Merge [2] and [8] -> [2, 8] -->
+      <path d="M 310 150 C 310 240, 310 280, 310 295" fill="none" stroke="#16a34a" stroke-width="2" marker-end="url(#merge-arr)"/>
+      <rect x="270" y="297" width="85" height="28" rx="4" fill="#dcfce7" stroke="#16a34a"/>
+      <text x="312" y="311" class="node-box-g">[2, 8]</text>
+
+      <!-- Final Merge [1, 4, 5] and [2, 8] -> [1, 2, 4, 5, 8] -->
+      <path d="M 120 327 C 140 350, 190 350, 200 355" fill="none" stroke="#16a34a" stroke-width="2.5" marker-end="url(#merge-arr)"/>
+      <path d="M 300 327 C 280 350, 220 350, 210 355" fill="none" stroke="#16a34a" stroke-width="2.5" marker-end="url(#merge-arr)"/>
+
+      <rect x="135" y="358" width="150" height="32" rx="6" fill="#16a34a" stroke="#15803d"/>
+      <text x="210" y="374" class="node-box" fill="#ffffff">[1, 2, 4, 5, 8]</text>
+    </g>
+  </g>
+
+  <!-- RIGHT PANEL: The 2-Pointer Merge Algorithm & Complexity -->
+  <g transform="translate(530, 85)">
+    <rect width="394" height="425" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+    <text x="24" y="28" class="section-title">2-Pointer Linear Merge Step</text>
+
+    <!-- Visual 2-Pointer Merge -->
+    <g transform="translate(24, 45)">
+      <rect width="346" height="150" rx="6" fill="#eff6ff" stroke="#bfdbfe"/>
+      <text x="14" y="22" class="pass-hdr">Merging [1, 4, 5] and [2, 8]:</text>
+      <text x="14" y="44" class="desc-text">• Pointer i at L[0]=1, Pointer j at R[0]=2.</text>
+      <text x="14" y="62" class="desc-text">  1 &lt;= 2 → Take <tspan font-weight="600" fill="#15803d">1</tspan>, advance i.</text>
+      <text x="14" y="80" class="desc-text">• Compare L[1]=4 and R[0]=2:</text>
+      <text x="14" y="98" class="desc-text">  2 &lt; 4 → Take <tspan font-weight="600" fill="#15803d">2</tspan>, advance j.</text>
+      <text x="14" y="116" class="desc-text">• Compare 4 and 8 → Take <tspan font-weight="600" fill="#15803d">4</tspan>. Compare 5 and 8 → Take <tspan font-weight="600" fill="#15803d">5</tspan>.</text>
+      <text x="14" y="134" class="desc-text">• Copy remaining: <tspan font-weight="600" fill="#15803d">8</tspan>. Total linear time: <tspan font-weight="600">O(n)</tspan>.</text>
+    </g>
+
+    <!-- Master Theorem & Complexity Box -->
+    <g transform="translate(24, 210)">
+      <rect width="346" height="190" rx="6" fill="#f0fdf4" stroke="#bbf7d0"/>
+      <text x="14" y="22" class="pass-hdr" fill="#166534">Master Theorem Derivation:</text>
+      <text x="14" y="44" class="code-font" fill="#166534">T(n) = 2T(n/2) + O(n)</text>
+      <text x="14" y="66" class="desc-text">• a = 2 (subproblems), b = 2 (halving factor).</text>
+      <text x="14" y="84" class="desc-text">• f(n) = O(n) = O(n^{log_b a}) since log_2 2 = 1.</text>
+      <text x="14" y="102" class="desc-text">• Case 2 of Master Theorem applies:</text>
+      <text x="24" y="122" class="code-font" font-weight="bold" fill="#15803d">T(n) = \Theta(n \log n) \text{ across ALL cases!}</text>
+
+      <text x="14" y="146" class="desc-text">• <tspan font-weight="600">Stable?</tspan> <tspan font-weight="600" fill="#15803d">YES</tspan> (preserves left element when L[i] == R[j]).</text>
+      <text x="14" y="162" class="desc-text">• <tspan font-weight="600">In-Place?</tspan> <tspan font-weight="600" fill="#dc2626">NO</tspan> (Requires O(n) temporary buffer).</text>
+      <text x="14" y="178" class="desc-text">• Preferred for <tspan font-weight="600">Linked Lists</tspan> (O(1) pointer-merge!).</text>
+    </g>
+  </g>
+</svg>

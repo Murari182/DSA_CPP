@@ -1,0 +1,135 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 520" width="100%" height="100%">
+  <defs>
+    <style>
+      .title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-weight: bold; font-size: 20px; fill: #0f172a; }
+      .subtitle { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 13px; fill: #475569; }
+      .section-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-weight: 600; font-size: 15px; fill: #1e293b; }
+      .cell-text { font-family: "JetBrains Mono", "SF Mono", Consolas, monospace; font-weight: bold; font-size: 16px; fill: #0f172a; text-anchor: middle; dominant-baseline: central; }
+      .cell-text-w { font-family: "JetBrains Mono", "SF Mono", Consolas, monospace; font-weight: bold; font-size: 16px; fill: #ffffff; text-anchor: middle; dominant-baseline: central; }
+      .pass-hdr { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-weight: 600; font-size: 13px; fill: #1e3a8a; }
+      .desc-text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 12px; fill: #334155; }
+      .badge-txt { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-weight: 600; font-size: 11px; fill: #ffffff; text-anchor: middle; dominant-baseline: central; }
+      .action-txt { font-family: "JetBrains Mono", "SF Mono", Consolas, monospace; font-size: 12px; fill: #ea580c; font-weight: 600; }
+    </style>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect width="960" height="520" fill="#f8fafc" rx="12"/>
+  <rect x="12" y="12" width="936" height="496" fill="#ffffff" rx="10" stroke="#e2e8f0" stroke-width="1.5"/>
+
+  <!-- Title & Subtitle -->
+  <text x="36" y="42" class="title">Bubble Sort: Step-by-Step Execution &amp; Optimization</text>
+  <text x="36" y="62" class="subtitle">Adjacent element comparisons, bubbling maximal elements right, and O(n) early termination</text>
+
+  <!-- LEFT PANEL: Initial State & Pass 1 Execution -->
+  <g transform="translate(36, 85)">
+    <rect width="425" height="405" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+    <text x="20" y="28" class="section-title">Initial Array: [5, 1, 4, 2, 8] (n = 5)</text>
+
+    <!-- Pass 1 Container -->
+    <g transform="translate(20, 45)">
+      <rect x="0" y="0" width="385" height="235" rx="6" fill="#eff6ff" stroke="#bfdbfe"/>
+      <text x="14" y="22" class="pass-hdr">Pass 1: Comparing Adjacent Pairs (Range: j = 0 to 3)</text>
+
+      <!-- Step 1: Compare (5, 1) -> Swap -->
+      <g transform="translate(14, 35)">
+        <text x="0" y="16" class="action-txt">1. Compare arr[0] (5) &gt; arr[1] (1) → SWAP</text>
+        <rect x="0" y="24" width="38" height="34" rx="4" fill="#ffedd5" stroke="#ea580c" stroke-width="2"/>
+        <text x="19" y="41" class="cell-text">5</text>
+        <rect x="42" y="24" width="38" height="34" rx="4" fill="#ffedd5" stroke="#ea580c" stroke-width="2"/>
+        <text x="61" y="41" class="cell-text">1</text>
+        <rect x="84" y="24" width="38" height="34" rx="4" fill="#ffffff" stroke="#cbd5e1"/>
+        <text x="103" y="41" class="cell-text">4</text>
+        <rect x="126" y="24" width="38" height="34" rx="4" fill="#ffffff" stroke="#cbd5e1"/>
+        <text x="145" y="41" class="cell-text">2</text>
+        <rect x="168" y="24" width="38" height="34" rx="4" fill="#ffffff" stroke="#cbd5e1"/>
+        <text x="187" y="41" class="cell-text">8</text>
+      </g>
+
+      <!-- Step 2: Compare (5, 4) -> Swap -->
+      <g transform="translate(14, 102)">
+        <text x="0" y="16" class="action-txt">2. Compare arr[1] (5) &gt; arr[2] (4) → SWAP</text>
+        <rect x="0" y="24" width="38" height="34" rx="4" fill="#ffffff" stroke="#cbd5e1"/>
+        <text x="19" y="41" class="cell-text">1</text>
+        <rect x="42" y="24" width="38" height="34" rx="4" fill="#ffedd5" stroke="#ea580c" stroke-width="2"/>
+        <text x="61" y="41" class="cell-text">5</text>
+        <rect x="84" y="24" width="38" height="34" rx="4" fill="#ffedd5" stroke="#ea580c" stroke-width="2"/>
+        <text x="103" y="41" class="cell-text">4</text>
+        <rect x="126" y="24" width="38" height="34" rx="4" fill="#ffffff" stroke="#cbd5e1"/>
+        <text x="145" y="41" class="cell-text">2</text>
+        <rect x="168" y="24" width="38" height="34" rx="4" fill="#ffffff" stroke="#cbd5e1"/>
+        <text x="187" y="41" class="cell-text">8</text>
+      </g>
+
+      <!-- Step 3: Compare (5, 2) -> Swap -->
+      <g transform="translate(14, 168)">
+        <text x="0" y="16" class="action-txt">3. Compare arr[2] (5) &gt; arr[3] (2) → SWAP</text>
+        <rect x="0" y="24" width="38" height="34" rx="4" fill="#ffffff" stroke="#cbd5e1"/>
+        <text x="19" y="41" class="cell-text">1</text>
+        <rect x="42" y="24" width="38" height="34" rx="4" fill="#ffffff" stroke="#cbd5e1"/>
+        <text x="61" y="41" class="cell-text">4</text>
+        <rect x="84" y="24" width="38" height="34" rx="4" fill="#ffedd5" stroke="#ea580c" stroke-width="2"/>
+        <text x="103" y="41" class="cell-text">5</text>
+        <rect x="126" y="24" width="38" height="34" rx="4" fill="#ffedd5" stroke="#ea580c" stroke-width="2"/>
+        <text x="145" y="41" class="cell-text">2</text>
+        <!-- Element 8 is locked in sorted position -->
+        <rect x="168" y="24" width="38" height="34" rx="4" fill="#16a34a" stroke="#15803d"/>
+        <text x="187" y="41" class="cell-text-w">8</text>
+        <text x="215" y="41" class="desc-text" fill="#15803d">← Sorted [4]</text>
+      </g>
+    </g>
+
+    <!-- Pass 1 Outcome -->
+    <g transform="translate(20, 300)">
+      <rect width="385" height="90" rx="6" fill="#f1f5f9" stroke="#cbd5e1"/>
+      <text x="14" y="22" class="pass-hdr">Pass 1 Result:</text>
+      <text x="14" y="42" class="desc-text">• Array state: <tspan class="cell-text" font-size="13">[1, 4, 2, 5, 8]</tspan></text>
+      <text x="14" y="60" class="desc-text">• The largest value (<tspan font-weight="600" fill="#15803d">8</tspan>) has bubbled to its final index 4.</text>
+      <text x="14" y="78" class="desc-text">• Outer loop can now shrink inner boundary: <tspan font-weight="600">n - i - 1</tspan>.</text>
+    </g>
+  </g>
+
+  <!-- RIGHT PANEL: Pass 2, Pass 3 Early Stop & Complexity -->
+  <g transform="translate(485, 85)">
+    <rect width="439" height="405" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+    <text x="24" y="28" class="section-title">Subsequent Passes &amp; Adaptive Early Exit</text>
+
+    <!-- Pass 2 Box -->
+    <g transform="translate(24, 45)">
+      <rect width="391" height="110" rx="6" fill="#fefce8" stroke="#fef08a"/>
+      <text x="14" y="22" class="pass-hdr" fill="#854d0e">Pass 2: Scanning j = 0 to 2 (arr[1] &gt; arr[2] → swap)</text>
+      <g transform="translate(14, 30)">
+        <rect x="0" y="10" width="38" height="34" rx="4" fill="#ffffff" stroke="#cbd5e1"/>
+        <text x="19" y="27" class="cell-text">1</text>
+        <rect x="42" y="10" width="38" height="34" rx="4" fill="#ffedd5" stroke="#ea580c" stroke-width="2"/>
+        <text x="61" y="27" class="cell-text">2</text>
+        <rect x="84" y="10" width="38" height="34" rx="4" fill="#ffedd5" stroke="#ea580c" stroke-width="2"/>
+        <text x="103" y="27" class="cell-text">4</text>
+        <rect x="126" y="10" width="38" height="34" rx="4" fill="#16a34a" stroke="#15803d"/>
+        <text x="145" y="27" class="cell-text-w">5</text>
+        <rect x="168" y="10" width="38" height="34" rx="4" fill="#16a34a" stroke="#15803d"/>
+        <text x="187" y="27" class="cell-text-w">8</text>
+      </g>
+      <text x="14" y="90" class="desc-text">• Value <tspan font-weight="600" fill="#15803d">5</tspan> locked at index 3. Array: [1, 2, 4, 5, 8].</text>
+    </g>
+
+    <!-- Pass 3 Early Stop Box -->
+    <g transform="translate(24, 170)">
+      <rect width="391" height="110" rx="6" fill="#f0fdf4" stroke="#bbf7d0"/>
+      <text x="14" y="22" class="pass-hdr" fill="#166534">Pass 3: Zero Swaps Performed (Early Exit Optimization)</text>
+      <text x="14" y="44" class="desc-text">• Compare (1, 2) → no swap. Compare (2, 4) → no swap.</text>
+      <text x="14" y="62" class="action-txt" fill="#15803d">bool swapped == false → Array is already SORTED!</text>
+      <text x="14" y="80" class="desc-text">• Break loop immediately! Avoids unnecessary passes 4 and 5.</text>
+      <text x="14" y="96" class="desc-text">• <tspan font-weight="600" fill="#15803d">Best-Case Time Complexity:</tspan> O(n) linear check.</text>
+    </g>
+
+    <!-- Operational Profile Box -->
+    <g transform="translate(24, 295)">
+      <rect width="391" height="95" rx="6" fill="#f1f5f9" stroke="#cbd5e1"/>
+      <text x="14" y="22" class="pass-hdr">Algorithmic Classification:</text>
+      <text x="14" y="42" class="desc-text">• <tspan font-weight="600">Stable?</tspan> <tspan fill="#15803d" font-weight="600">YES</tspan> (never swaps equal elements: arr[j] &gt; arr[j+1]).</text>
+      <text x="14" y="58" class="desc-text">• <tspan font-weight="600">In-Place?</tspan> <tspan fill="#15803d" font-weight="600">YES</tspan> (Auxiliary Space = O(1)).</text>
+      <text x="14" y="74" class="desc-text">• <tspan font-weight="600">Time Complexity:</tspan> Best: O(n) | Avg: O(n²) | Worst: O(n²).</text>
+    </g>
+  </g>
+</svg>

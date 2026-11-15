@@ -1,0 +1,121 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="100%" height="100%">
+  <defs>
+    <style>
+      .title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-weight: bold; font-size: 20px; fill: #0f172a; }
+      .subtitle { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 13px; fill: #475569; }
+      .case-hdr { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-weight: 600; font-size: 14px; fill: #1e3a8a; }
+      .node-txt { font-family: "JetBrains Mono", "SF Mono", Consolas, monospace; font-weight: bold; font-size: 14px; fill: #ffffff; text-anchor: middle; dominant-baseline: central; }
+      .desc-text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 12px; fill: #334155; }
+      .code-font { font-family: "JetBrains Mono", "SF Mono", Consolas, monospace; font-size: 11px; fill: #1e3a8a; }
+    </style>
+    <marker id="rot-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#16a34a"/>
+    </marker>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect width="960" height="540" fill="#f8fafc" rx="12"/>
+  <rect x="12" y="12" width="936" height="516" fill="#ffffff" rx="10" stroke="#e2e8f0" stroke-width="1.5"/>
+
+  <!-- Title & Subtitle -->
+  <text x="36" y="42" class="title">AVL Tree Balancing: The Four Canonical Rotations</text>
+  <text x="36" y="62" class="subtitle">Balance Factor BF = height(L) - height(R) ∈ {-1, 0, 1} and strictly O(1) pointer rebalancing</text>
+
+  <!-- PANEL 1: LL ROTATION (Right Rotate) -->
+  <g transform="translate(36, 85)">
+    <rect width="425" height="195" rx="8" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+    <text x="16" y="24" class="case-hdr">1. LL Case: Right Rotation on Z (BF = +2)</text>
+    <text x="16" y="42" class="desc-text">Inserted in Left Subtree of Left Child Y</text>
+
+    <!-- Before LL -->
+    <g transform="translate(30, 50)">
+      <line x1="80" y1="20" x2="45" y2="55" stroke="#94a3b8" stroke-width="2"/>
+      <line x1="45" y1="55" x2="15" y2="90" stroke="#94a3b8" stroke-width="2"/>
+      <circle cx="80" cy="20" r="14" fill="#dc2626"/>
+      <text x="80" y="20" class="node-txt">Z</text>
+      <circle cx="45" cy="55" r="14" fill="#2563eb"/>
+      <text x="45" y="55" class="node-txt">Y</text>
+      <circle cx="15" cy="90" r="14" fill="#16a34a"/>
+      <text x="15" y="90" class="node-txt">X</text>
+    </g>
+
+    <!-- Rotation Arrow -->
+    <path d="M 170 100 L 220 100" fill="none" stroke="#16a34a" stroke-width="2.5" marker-end="url(#rot-arr)"/>
+    <text x="195" y="88" class="code-font" fill="#15803d" text-anchor="middle">RightRotate</text>
+
+    <!-- After LL -->
+    <g transform="translate(230, 50)">
+      <line x1="80" y1="20" x2="45" y2="60" stroke="#94a3b8" stroke-width="2"/>
+      <line x1="80" y1="20" x2="115" y2="60" stroke="#94a3b8" stroke-width="2"/>
+      <circle cx="80" cy="20" r="14" fill="#15803d"/>
+      <text x="80" y="20" class="node-txt">Y</text>
+      <circle cx="45" cy="60" r="14" fill="#16a34a"/>
+      <text x="45" y="60" class="node-txt">X</text>
+      <circle cx="115" cy="60" r="14" fill="#2563eb"/>
+      <text x="115" y="60" class="node-txt">Z</text>
+    </g>
+    <text x="16" y="175" class="desc-text" fill="#15803d" font-weight="600">Balanced! Height restored to 1.</text>
+  </g>
+
+  <!-- PANEL 2: RR ROTATION (Left Rotate) -->
+  <g transform="translate(495, 85)">
+    <rect width="425" height="195" rx="8" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+    <text x="16" y="24" class="case-hdr">2. RR Case: Left Rotation on Z (BF = -2)</text>
+    <text x="16" y="42" class="desc-text">Inserted in Right Subtree of Right Child Y</text>
+
+    <!-- Before RR -->
+    <g transform="translate(20, 50)">
+      <line x1="30" y1="20" x2="65" y2="55" stroke="#94a3b8" stroke-width="2"/>
+      <line x1="65" y1="55" x2="95" y2="90" stroke="#94a3b8" stroke-width="2"/>
+      <circle cx="30" cy="20" r="14" fill="#dc2626"/>
+      <text x="30" y="20" class="node-txt">Z</text>
+      <circle cx="65" cy="55" r="14" fill="#2563eb"/>
+      <text x="65" y="55" class="node-txt">Y</text>
+      <circle cx="95" cy="90" r="14" fill="#16a34a"/>
+      <text x="95" y="90" class="node-txt">X</text>
+    </g>
+
+    <!-- Rotation Arrow -->
+    <path d="M 170 100 L 220 100" fill="none" stroke="#16a34a" stroke-width="2.5" marker-end="url(#rot-arr)"/>
+    <text x="195" y="88" class="code-font" fill="#15803d" text-anchor="middle">LeftRotate</text>
+
+    <!-- After RR -->
+    <g transform="translate(230, 50)">
+      <line x1="80" y1="20" x2="45" y2="60" stroke="#94a3b8" stroke-width="2"/>
+      <line x1="80" y1="20" x2="115" y2="60" stroke="#94a3b8" stroke-width="2"/>
+      <circle cx="80" cy="20" r="14" fill="#15803d"/>
+      <text x="80" y="20" class="node-txt">Y</text>
+      <circle cx="45" cy="60" r="14" fill="#2563eb"/>
+      <text x="45" y="60" class="node-txt">Z</text>
+      <circle cx="115" cy="60" r="14" fill="#16a34a"/>
+      <text x="115" y="60" class="node-txt">X</text>
+    </g>
+    <text x="16" y="175" class="desc-text" fill="#15803d" font-weight="600">Balanced! Height restored to 1.</text>
+  </g>
+
+  <!-- PANEL 3: LR ROTATION (Double: Left then Right) -->
+  <g transform="translate(36, 295)">
+    <rect width="425" height="205" rx="8" fill="#fdf2f8" stroke="#fbcfe8" stroke-width="1.5"/>
+    <text x="16" y="24" class="case-hdr" fill="#9d174d">3. LR Case: Left on Y, then Right on Z</text>
+    <text x="16" y="42" class="desc-text">Inserted in Right Subtree of Left Child Y</text>
+    <text x="16" y="70" class="code-font" fill="#be185d">z-&gt;left = leftRotate(z-&gt;left);</text>
+    <text x="16" y="90" class="code-font" fill="#be185d">return rightRotate(z);</text>
+    <text x="16" y="125" class="desc-text">• Zig-zag pattern: Y is left child of Z, X is right child of Y.</text>
+    <text x="16" y="145" class="desc-text">• Step 1 (Left on Y) straightens tree into LL case (X becomes left of Z).</text>
+    <text x="16" y="165" class="desc-text">• Step 2 (Right on Z) elevates X as new balanced root.</text>
+    <text x="16" y="188" class="desc-text" font-weight="bold" fill="#15803d">Result: Perfectly balanced subtree!</text>
+  </g>
+
+  <!-- PANEL 4: RL ROTATION (Double: Right then Left) -->
+  <g transform="translate(495, 295)">
+    <rect width="425" height="205" rx="8" fill="#fdf2f8" stroke="#fbcfe8" stroke-width="1.5"/>
+    <text x="16" y="24" class="case-hdr" fill="#9d174d">4. RL Case: Right on Y, then Left on Z</text>
+    <text x="16" y="42" class="desc-text">Inserted in Left Subtree of Right Child Y</text>
+    <text x="16" y="70" class="code-font" fill="#be185d">z-&gt;right = rightRotate(z-&gt;right);</text>
+    <text x="16" y="90" class="code-font" fill="#be185d">return leftRotate(z);</text>
+    <text x="16" y="125" class="desc-text">• Zig-zag pattern: Y is right child of Z, X is left child of Y.</text>
+    <text x="16" y="145" class="desc-text">• Step 1 (Right on Y) straightens tree into RR case.</text>
+    <text x="16" y="165" class="desc-text">• Step 2 (Left on Z) elevates X as new balanced root.</text>
+    <text x="16" y="188" class="desc-text" font-weight="bold" fill="#15803d">Guarantees strictly O(log n) worst-case BST operations!</text>
+  </g>
+</svg>
